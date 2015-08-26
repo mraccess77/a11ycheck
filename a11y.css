@@ -1,0 +1,597 @@
+/* tabindex does not seem to work all of the time*/
+[tabindex]::before {
+  content: "tbx" + attr(tabindex) !important;
+}
+
+[title] {
+  border: thin solid silver !important;
+}
+
+main, nav, section, article, aside, header, footer, address, dialog {
+  border: thin solid orange !important;
+}
+
+form {
+  border: thin dotted orange !important;
+}
+
+h1, h2, h3, h4,h5, h6 ,[role="heading"] {
+  border: medium solid lightblue !important;
+}
+
+abbr {
+  border: thin dashed cyan !important;    
+}
+
+a, area {
+  border: thin solid cyan !important;  
+}
+
+/* atempt to provide some spacing around image so we can see link border */
+/* a img {
+  margin:1em;
+} */
+
+audio {
+  border: thin solid yellow !important;  
+}
+
+button {
+  border: thin solid cyan !important;  
+}
+
+canvas {
+  border: medium dashed pink !important;  
+}
+
+ul, ol, dl {
+  border: thin solid purple !important;  
+}
+
+img {
+  border: thin solid pink !important;  
+  padding:.25em;
+}
+
+svg {
+  border: thick solid pink !important;  
+}
+
+table {
+  border-color: red !important;
+  border-style: solid !important;
+  border-width: thin !important;
+  padding:.25em;
+  padding-top:.25em;
+}
+
+td {
+  border-color: red !important;
+  border-style: dashed !important;
+  border-width: thin !important;
+}
+
+th {
+  border-color: red !important;
+  border-style: dotted !important;
+  border-width: medium !important;
+}
+
+caption {
+    border: thin solid yellow !important;  
+}
+
+label {
+    border: thin solid gold !important;  
+}
+
+legend {
+    border: thin dashed gold !important;  
+}
+
+iframe {
+    border: medium dotted green !important;  
+}
+
+applet {
+  border: thin solid yellow !important;  
+}
+
+video {
+  border: thin solid yellow !important;  
+}
+
+object {
+  border: thin solid yellow !important;  
+}
+
+/* does not appear to work */
+[style~="background-image"] {
+    border: medium dotted pink !important;  
+}
+
+[tabindex] {
+   border: thin dashed blue !important;  
+}
+
+[role] {
+  border: thin dotted sienna !important;
+}
+
+[role="navigation"], [role="banner"], [role="contentinfo"], [role="main"], [role="complementary"], [role="form"], [role="search"], [role="application"], [role="region"] {
+  border: thin solid orange !important;
+}
+
+[lang]::before {
+  content: "lang="attr(lang) !important;
+  font-size:small !important;
+  font-style: italic !important;
+  border:darkblue !important;
+  background-color:darkblue !important;
+  color:white !important;
+  font-weight:bold !important;  
+}
+
+/* does not appear to work */
+iframe::before {
+  content: "if" !important;
+  font-size:small !important;
+  font-style: italic !important;
+  border:darkblue !important;
+  background-color:green !important;
+  color:white !important;
+  font-weight:bold !important;  
+}
+
+button::before {
+  content: "b" !important;
+  font-size:small !important;
+  font-style: italic !important;
+  border:darkblue !important;
+  background-color:cyan !important;
+  color:black !important;  
+  font-weight:bold !important;
+  padding-right:.25em;  
+}
+
+a::before {
+  content: "a" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:cyan !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
+address::before {
+  content: "adr" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
+area::before {
+  content: "area" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:cyan !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
+abbr::before {
+  content: "abr" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:cyan !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+audio::before {
+  content: "aud" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:yellow !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+canvas::before {
+  content: "can" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:pink !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+caption::before {
+  content: "cap" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:yellow !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+label::before {
+  content: "lbl" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:gold !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
+dialog::before {
+  content: "dlg" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
+h1::before {
+  content: "h1" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:lightblue !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+h1::after {
+  content: "h1" !important;
+  font-size:small !important;
+  border:darkblue !importan!;
+  background-color:lightblue !important;
+  color:black !important;
+  padding-right:.25em;  
+}
+
+h2::before {
+  content: "h2" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h2::after {
+  content: "h2" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h3::before {
+  content: "h3" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h3::after {
+  content: "h3" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h4::before {
+  content: "h4" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h5::before {
+  content: "h5" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightblue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+h6::before {
+  content: "h6" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:lightlbue !important;
+  color:black !important;  
+  padding-right:.25em !important;  
+}
+
+/* does not seem to work */
+svg::before {
+  content: "s" !important;
+  font-size:small !important;
+  border:darkblue !important;
+  background-color:cyan !important;
+  color:black !important;  
+}
+
+table::before {
+  content: "table" !important;
+  padding-right:.20em;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:red !important;
+  color:white !important;  
+  font-weight:bold !important;  
+}
+
+table[summary]::before {
+  content: attr(summary) !important;
+  padding-right:.25em !important;     
+}
+
+[role]::before {
+  content: attr(role) !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:sienna !important;
+  color:white !important;  
+  font-weight:regular !important;  
+  padding-right:.25em !important;    
+}
+
+main::before, [role="main"]::before {
+  content: "main" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+header::before, {
+  content: "hdr" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+footer::before, {
+  content: "ftr" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+[role="banner"]::before {
+  content: "ban" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+[role="region"]::before {
+  content: "reg" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+[role="contentinfo"]::before {
+  content: "coninfo" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+section::before {
+  content: "sec" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+article::before {
+  content: "art" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+nav::before, [role="navigation"]::before {
+  content: "nav" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+aside::before, [role="complementary"]::before {
+  content: "aside" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+[role="application"]::before {
+  content: "app" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+form::before, [role="form"]::before {
+  content: "form" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:orange !important;
+  color:black !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+ul::before {
+  content: "ul" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:purple !important;
+  color:white !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+ol::before {
+  content: "ol" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:purple !important;
+  color:white !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+li::before {
+  content: "li" !important;
+  font-size:xx-small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:purple !important;
+  color:white !important;  
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+dl::before {
+  content: "dl" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:purple !important;
+  color:white !important;
+  font-weight:bold !important;  
+  padding-right:.25em !important;    
+}
+
+
+/* img does not support before */
+img::before {
+  content: attr(alt);
+}
+
+/* img does not support before */
+img::after {
+  content: attr(alt);
+}
+
+/* input does not support before */
+input::before {
+
+}
+
+input[type="image"] {
+  content: attr(alt) !important;
+  font-size:xx-small !important;
+  background-color:pink !important;
+  color:black !important;
+}
+
+/* only inline - does not appear to work */
+[style~="background-image"]::before {
+  content: "bg" !important;
+  font-size:xx-small !important;
+  background-color:green !important;
+  color:white !important;
+}
+
+/* only lists inline event handlers */
+[onclick]::before {
+  content: "c" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:cyan !important;
+  color:black !important;  
+  font-weight:bold !important;  
+}
+
+/* too verbose
+[title]::before {
+  content: attr(title) !important;
+  font-size:xx-small !important;
+  background-color:green !important;
+  color:white !important;
+} */
+
+/* not worth checking for CSS outline none */
+
