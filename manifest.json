@@ -19,6 +19,7 @@
 	"web_accessible_resources": [
 			 "darken.js"
 	 ],
+  "icons": {"32": "Acheck.png"}, 
 	"permissions": [
    "activeTab",
    "tabs",
