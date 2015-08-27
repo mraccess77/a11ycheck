@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(
     }
   } 
 );
-  
+
  // 'chrome-extension://__MSG_@@extension_id__/darken.js'
  // chrome.extension.getURL('/darken.js')
 //  chrome.tabs.executeScript(null, {file: "a11y.js"}, null);
@@ -27,10 +27,9 @@ function darkenPage() {
 }
 
 function showARIA() {
-  //var str = chrome.extension.getURL('darken.js');
+  //var str = chrome.extension.getURL('ARIAchecker.js');
   var element = document.createElement('script');
-  alert('test');  
-  element.src = "http://www.accessibilityhq.com/js/ARIAchecker.js";
+  element.src = "https://mraccess77.github.io/favlets/ARIAchecker.js";
   document.head.appendChild(element);   
 
 }
