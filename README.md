@@ -5,7 +5,10 @@ As this extension is not yet in the Chrome Store -- go to chrome:extensions and 
 
 The darken option is just an added option to make page text black and all link text dark blue and underlined to make the page easier to see for the user.  I personally find reading pages with light gray text difficult.
 
-Element - indicator - border
+<table>
+<tr>
+<th> Element</th> <th>indicator</th> <th>border</th>
+</tr>
 ARIA landmarks - name on brown background - orange
 ARIA roles  -name on brown backgroound - none
 a - a - cyan 
