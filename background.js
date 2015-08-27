@@ -12,15 +12,27 @@ chrome.runtime.onInstalled.addListener(function() {
   // When the app gets installed, set up the context menus
 
 	chrome.contextMenus.create({
-		"title": "A11y check",
+		"title": "ARIA",
 		"contexts": ["all", "page", "selection", "image", "link"],
-		"onclick" : clickHandler
+		"onclick" : showARIA
+	});
+
+	chrome.contextMenus.create({
+		"title": "Darken",
+		"contexts": ["all", "page", "selection", "image", "link"],
+		"onclick" :  darken
 	});
 
 });
 
-function clickHandler(e) {
-  showAlt(); 
+function showARIA(e) {
+
 }
+
+function darken(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"darken"}, function(response) { } );
+}
+
+
 
 

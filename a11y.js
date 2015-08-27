@@ -1,10 +1,28 @@
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.msg == "alt")
+  function (request, sender, sendResponse) {
+    if (request.msg == "alt") {
       showAlt();
-});
+    }
+    else if (request.msg == "darken") {
+      darkenPage();
+    }
+  } 
+);
   
-  
+ // 'chrome-extension://__MSG_@@extension_id__/darken.js'
+ // chrome.extension.getURL('/darken.js')
+//  chrome.tabs.executeScript(null, {file: "a11y.js"}, null);
+  /*element.src = 'https://labs.ssbbartgroup.com/index.php?title=Darken.js&amp;action=raw&amp;ctype=text/javascript'; */
+
+function darkenPage() {
+ 
+  var str = chrome.extension.getURL('darken.js');
+  var element = document.createElement('script');
+  element.src = str;
+  document.head.appendChild(element);   
+
+}
+
 function showAlt() {
 
   var col = document.getElementsByTagName('img');

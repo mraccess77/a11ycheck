@@ -575,8 +575,8 @@ input[type="image"] {
 }
 
 /* only lists inline event handlers */
-[onclick]::before {
-  content: "c" !important;
+div[onclick]::before, span[onclick]::before, th[onclick]::before. td[onclick]::before {
+  content: "oc" !important;
   font-size:small !important;
   font-style:italic !important;
   border:darkblue !important;

@@ -16,8 +16,16 @@
       "js": ["a11y.js"]
     }
   ],
-  "permissions": [
-    "activeTab",
-    "tabs"
+	"web_accessible_resources": [
+			 "darken.js"
+	 ],
+	"permissions": [
+   "activeTab",
+   "tabs",
+   "contextMenus",
+   "http://*/*", 
+   "https://*/*", 
+   "file://*/*",
+   "webRequest"
   ]
 }
