@@ -1,2 +1,4 @@
 # a11ycheck
-a11y Structure Check
+This project is a CSS and JS based accessibility (a11y) Structure manual checking tool.  It is a CSS file that shows the user the different HTML and ARIA structural markup on the page using pseudo before and after.  Some element do not support these CSS properties and thus a JS file is also associated with it.  This git is a setup to be a Chrome extension.  Clicking the extension on the active tab will apply the CSS and JS to that tab.  In addition, a context menu is provided with additional favlets for manual testing that are posted on my mraccess77.github.io project site.
+
+As this extension is not yet in the Chrome Store -- go to chrome:extensions and check the developer mode checkbox.  Choose the load unpacked extendtion and point to the folder where you have downloaded this git to.  The extension should now be available.
