@@ -6,6 +6,9 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "darken") {
       darkenPage();
     }
+    else if (request.msg == "showARIA") {
+      showARIA();
+    }
   } 
 );
   
@@ -19,6 +22,15 @@ function darkenPage() {
   var str = chrome.extension.getURL('darken.js');
   var element = document.createElement('script');
   element.src = str;
+  document.head.appendChild(element);   
+
+}
+
+function showARIA() {
+  //var str = chrome.extension.getURL('darken.js');
+  var element = document.createElement('script');
+  alert('test');  
+  element.src = "http://www.accessibilityhq.com/js/ARIAchecker.js";
   document.head.appendChild(element);   
 
 }

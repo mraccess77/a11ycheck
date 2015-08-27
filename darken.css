@@ -1,0 +1,9 @@
+* {
+  color:black !important;
+}
+
+a, a:link, a:visited {
+  text-decoration: underline !important; 
+  color:darkblue !important;
+}
+

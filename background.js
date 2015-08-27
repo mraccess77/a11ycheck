@@ -25,12 +25,13 @@ chrome.runtime.onInstalled.addListener(function() {
 
 });
 
-function showARIA(e) {
-
+function showARIA(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
 
 function darken(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"darken"}, function(response) { } );
+  // chrome.tabs.sendMessage(tab.id, {msg:"darken"}, function(response) { } );
+	chrome.tabs.insertCSS(null, {file:"darken.css"} );  
 }
 
 
