@@ -21,7 +21,7 @@ The darken option is just an added option to make page text black and all link t
   <tbody>
 <tr>
   <td>ARIA landmarks</td>
-  <td>name on brown background</td>
+  <td>name on brown background (app, nav, main, ban, form, search, coninfo, reg, asd (complementary)</td>
   <td>orange</td>
 </tr>
 <tr>
@@ -41,8 +41,13 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>abbr</td>
-  <td>abbr</td>
+  <td>abr</td>
   <td>cyan</td>
+</tr>
+<tr>
+  <td>address</td>
+  <td>adr</td>
+  <td>orange</td>
 </tr>
 <tr>
   <td>applet</td>
@@ -51,7 +56,7 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>audio</td>
-  <td>none</td>
+  <td>aud</td>
   <td>yellow</td>
 </tr>
 <tr>
@@ -61,13 +66,18 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>canvas</td>
-  <td></td>
+  <td>can</td>
   <td><dashed pink/td>
 </tr>
 <tr>
   <td>caption</td>
   <td>cap</td>
   <td>yellow</td>
+</tr>
+<tr>
+  <td>dialog</td>
+  <td>dlg</td>
+  <td>orange</td>
 </tr>
 <tr>
   <td>dl</td>
@@ -96,13 +106,18 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>label</td>
-  <Td></td>
+  <Td>lbl</td>
   <td>gold</td>
 </tr>
 <tr>
   <td>label</td>
   <Td></td>
   <td>gold dashed</td>
+</tr>
+<tr>
+  <td>lang</td>
+  <td>lang code in white on dark blue</td>
+  <td>none</td>
 </tr>
 <tr>
   <td>li</td>
@@ -112,7 +127,7 @@ The darken option is just an added option to make page text black and all link t
 <tr>
   <td>main, nav, section, article, aside, 
   header, footer, address, dialog</td>
-  <td>none</td>
+  <td>main, nav, sec, art, asd,hdr, ftr, adr, dlg</td>
   <td>orange</td>
 </tr>
 <tr>
@@ -123,12 +138,23 @@ The darken option is just an added option to make page text black and all link t
 <tr>
   <td>ol</td>
   <td>ol</td>
+  <Td>cyan</td>
+</tr>
+<tr>
+  <td>onclick attribute</td>
+  <td>oc</td>
   <Td>purple</td>
 </tr>
+
 <tr>
   <td>svg</td>
   <td>svg</td>
   <td>pink</td>
+</tr>
+<tr>
+  <td>summary attribute</td>
+  <td>text of attribute in white on red background</td>
+  <td></td>
 </tr>
 <tr>
   <td>table</td>
