@@ -102,7 +102,8 @@ The darken option is just an added option to make page text black and all link t
   <td>purple</td>
 </tr>
 <tr>
-  <td>main, nav, section, article, aside, header, footer, address, dialog</td>
+  <td>main, nav, section, article, aside, 
+  header, footer, address, dialog</td>
   <td>none</td>
   <td>orange</td>
 </tr>
