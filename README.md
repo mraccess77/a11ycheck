@@ -9,7 +9,7 @@ The darken option is just an added option to make page text black and all link t
   <colgroup>
     <col style="width:20%;" />
     <col style="width:20%;" />
-    <col style="width:20%;" />
+    <col style="width:60%;" />
   </colgroup>  
   <thead>
     <tr>
