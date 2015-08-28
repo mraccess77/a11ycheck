@@ -242,6 +242,18 @@ label::before {
   padding-right:.25em;  
 }
 
+legend::before {
+  content: "leg" !important;
+  font-size:small !important;
+  font-style:italic !important;
+  border:darkblue !important;
+  background-color:gold !important;
+  color:black !important;
+  font-weight:bold !important;
+  text-transform: lowercase !important;
+  padding-right:.25em;  
+}
+
 dialog::before {
   content: "dlg" !important;
   font-size:small !important;
