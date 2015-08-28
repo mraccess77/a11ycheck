@@ -43,6 +43,12 @@ chrome.contextMenus.create({
 	"onclick" :  grayscale
 });
 
+chrome.contextMenus.create({
+	"title": "Linearize Tables",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  linearizeTables
+});
+
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
@@ -63,4 +69,8 @@ function removeStyles(info, tab) {
 
 function grayscale(info, tab) {
 	chrome.tabs.insertCSS(null, {file:"grayscale.css"} );  
+}
+
+function linearizeTables(info, tab) {
+	chrome.tabs.insertCSS(null, {file:"linearizeTables.css"} );  
 }
