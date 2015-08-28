@@ -7,21 +7,79 @@ The darken option is just an added option to make page text black and all link t
 
 <table>
 <tr>
-<th> Element</th> <th>indicator</th> <th>border</th>
+  <th>Element</th> 
+  <th>indicator</th>
+  <th>border</th>
 </tr>
-ARIA landmarks - name on brown background - orange
-ARIA roles  -name on brown backgroound - none
-a - a - cyan 
-button - b - cyan
-caption - cap - 
-dl - dl - purple
-img - alt -pink
-h1 - h6 - h1-h6 - lightblue
-li - li - purple
-ol - ol - purple
-svg - svg - pink
-ul - ul - purple
-title attribute - none - dotted gray border
-video -
+<tr>
+  <td>ARIA landmarks</td>
+  <td>name on brown background</td>
+  <td>orange</td>
+</tr>
+<tr>
+  <td>ARIA roles</td>
+  <td>name on brown backgroound</td>
+  <td>none</td>
+</tr>
+<tr>
+  <td>a</td>
+  <td>a</td>
+  <td>cyan</td>
+</tr>
+<tr>
+  <td>button</td>
+  <td>b</td>
+  <td>cyan</td>
+</tr>
+<tr>
+  <td>caption</td>
+  <td>cap</td>
+  <td></td>
+</tr>
+<tr>
+  <td>dl</td>
+  <td>dl</td>
+  <td>purple</td>
+</tr>
+<tr>
+  <td>img</td>
+  <td>alt</td>
+  <td>pink</td>
+</tr>
+<tr>
+  <td>h1 - h6</td>
+  <td>h1-h6</td>
+  <td>lightblue</td>
+</tr>
+<tr>
+  <td>li</td>
+  <td>li</td>
+  <td>purple</td>
+</tr>
+<tr>
+  <td>ol</td>
+  <td>ol</td>
+  <Td>purple</td>
+</tr>
+<tr>
+  <td>svg</td>
+  <td>svg</td>
+  <td>pink</td>
+</tr>
+<tr>
+  <td>ul</td>
+  <td>ul</td>
+  <Td>purple</td>
+</tr>
+<Tr>
+  <td>title attribute</td>
+  <td>none</td>
+  <td>dotted gray border</td>
+</tr>
+  <Td>video</td>
+  <td></td>
+  <td></td>
+</tr>  
+</table>
 
 
