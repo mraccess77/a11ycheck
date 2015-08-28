@@ -51,7 +51,7 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>applet</td>
-  <td></td>
+  <td>none</td>
   <td>yellow</td>
 </tr>
 <tr>
@@ -96,7 +96,7 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>iframe</td>
-  <td></td>
+  <td>none</td>
   <Td>green dotted</td>
 </tr>
 <tr>
