@@ -12,6 +12,15 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "removeStyles") {
       removeStyles();
     }
+    else if (request.msg == "complexTables") {
+      complexTables();
+    }
+    else if (request.msg == "showLang") {
+      showLang();
+    }
+    else if (request.msg == "showTitles") {
+      showTitles();
+    }
   } 
 );
 
@@ -49,7 +58,28 @@ function removeStyles () {
   };
   
 }
-         
+
+function complexTables() {
+  //var str = chrome.extension.getURL('complex_tables.js');
+  var element = document.createElement('script');
+  element.src = "https://mraccess77.github.io/favlets/complex_tables.js";
+  document.head.appendChild(element);   
+}
+
+function showLang() {
+  //var str = chrome.extension.getURL('lang.js');
+  var element = document.createElement('script');
+  element.src = "https://mraccess77.github.io/favlets/lang.js";
+  document.head.appendChild(element);   
+}
+
+function showTitles() {
+  //var str = chrome.extension.getURL('title_attribute.js');
+  var element = document.createElement('script');
+  element.src = "https://mraccess77.github.io/favlets/title_attribute.js";
+  document.head.appendChild(element);   
+}
+
 function showAlt() {
 
   var col = document.getElementsByTagName('img');

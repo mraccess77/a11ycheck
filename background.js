@@ -49,6 +49,24 @@ chrome.contextMenus.create({
 	"onclick" :  linearizeTables
 });
 
+chrome.contextMenus.create({
+	"title": "Show headers for complex Tables",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  complexTables
+});
+
+chrome.contextMenus.create({
+	"title": "Show lang attributes",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showLang
+});
+
+chrome.contextMenus.create({
+	"title": "Show title attributes",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showTitles
+});
+
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
@@ -73,4 +91,16 @@ function grayscale(info, tab) {
 
 function linearizeTables(info, tab) {
 	chrome.tabs.insertCSS(null, {file:"linearizeTables.css"} );  
+}
+
+function complexTables(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"complexTables"}, function(response) { } );
+}
+
+function showLang(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showLang"}, function(response) { } );
+}
+
+function showTitles(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showTitles"}, function(response) { } );
 }
