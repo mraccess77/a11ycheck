@@ -27,7 +27,7 @@ The darken option is just an added option to make page text black and all link t
 <tr>
   <td>ARIA roles</td>
   <td>name on brown backgroound</td>
-  <td>none</td>
+  <td>sienna (brownish orange)</td>
 </tr>
 <tr>
   <td>a</td>
