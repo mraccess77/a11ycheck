@@ -110,8 +110,8 @@ The darken option is just an added option to make page text black and all link t
   <td>gold</td>
 </tr>
 <tr>
-  <td>label</td>
-  <Td></td>
+  <td>legend</td>
+  <Td>none</td>
   <td>gold dashed</td>
 </tr>
 <tr>
@@ -132,7 +132,7 @@ The darken option is just an added option to make page text black and all link t
 </tr>
 <tr>
   <td>object</td>
-  <td></td>
+  <td>none</td>
   <td>yellow</td>
 </tr>
 <tr>
@@ -182,7 +182,7 @@ The darken option is just an added option to make page text black and all link t
   <td>dotted gray border</td>
 </tr>
   <Td>video</td>
-  <td></td>
+  <td>none</td>
   <td>yellow</td>
 </tr>
 </tbody>
