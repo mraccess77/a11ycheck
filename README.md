@@ -27,14 +27,39 @@ The darken option is just an added option to make page text black and all link t
   <td>cyan</td>
 </tr>
 <tr>
+  <td>area</td>
+  <td>area</td>
+  <td>cyan</td>
+</tr>
+<tr>
+  <td>abbr</td>
+  <td>abbr</td>
+  <td>cyan</td>
+</tr>
+<tr>
+  <td>applet</td>
+  <td></td>
+  <td>yellow</td>
+</tr>
+<tr>
+  <td>audio</td>
+  <td>none</td>
+  <td>yellow</td>
+</tr>
+<tr>
   <td>button</td>
   <td>b</td>
   <td>cyan</td>
 </tr>
 <tr>
+  <td>canvas</td>
+  <td></td>
+  <td><dashed pink/td>
+</tr>
+<tr>
   <td>caption</td>
   <td>cap</td>
-  <td></td>
+  <td>yellow</td>
 </tr>
 <tr>
   <td>dl</td>
@@ -47,14 +72,44 @@ The darken option is just an added option to make page text black and all link t
   <td>pink</td>
 </tr>
 <tr>
+  <td>form</td>
+  <td>none</td>
+  <td>organge</td>
+</tr>
+<tr>
+  <td>iframe</td>
+  <td></td>
+  <Td>green dotted</td>
+</tr>
+<tr>
   <td>h1 - h6</td>
   <td>h1-h6</td>
   <td>lightblue</td>
 </tr>
 <tr>
+  <td>label</td>
+  <Td></td>
+  <td>gold</td>
+</tr>
+<tr>
+  <td>label</td>
+  <Td></td>
+  <td>gold dashed</td>
+</tr>
+<tr>
   <td>li</td>
   <td>li</td>
   <td>purple</td>
+</tr>
+<tr>
+  <td>main, nav, section, article, aside, header, footer, address, dialog</td>
+  <td>none</td>
+  <td>orange</td>
+</tr>
+<tr>
+  <td>object</td>
+  <td></td>
+  <td>yellow</td>
 </tr>
 <tr>
   <td>ol</td>
@@ -65,6 +120,21 @@ The darken option is just an added option to make page text black and all link t
   <td>svg</td>
   <td>svg</td>
   <td>pink</td>
+</tr>
+<tr>
+  <td>table</td>
+  <td>table</td>
+  <td>red solid</td>
+</tr>
+<tr>
+  <td>td</td>
+  <td>none</td>
+  <td>red dashed</td>
+</tr>
+<tr>
+  <td>th</td>
+  <td>none</td>
+  <td>red dotted</td>
 </tr>
 <tr>
   <td>ul</td>
@@ -78,7 +148,7 @@ The darken option is just an added option to make page text black and all link t
 </tr>
   <Td>video</td>
   <td></td>
-  <td></td>
+  <td>yellow</td>
 </tr>  
 </table>
 
