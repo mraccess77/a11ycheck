@@ -9,6 +9,9 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "showARIA") {
       showARIA();
     }
+    else if (request.msg == "removeStyles") {
+      removeStyles();
+    }
   } 
 );
 
@@ -34,6 +37,19 @@ function showARIA() {
 
 }
 
+function removeStyles () {
+  var el = document.querySelectorAll('style,link');
+  for (var i=0; i<el.length; i++) {
+    el[i].parentNode.removeChild(el[i]); 
+  };
+
+  var el = document.querySelectorAll('[style]');
+  for (var i=0; i<el.length; i++) {
+    el[i].style="";
+  };
+  
+}
+         
 function showAlt() {
 
   var col = document.getElementsByTagName('img');
