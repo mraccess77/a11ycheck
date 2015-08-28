@@ -3,7 +3,7 @@ This project is a CSS and JS based accessibility (a11y) Structure manual checkin
 
 As this extension is not yet in the Chrome Store -- go to chrome:extensions and check the developer mode checkbox.  Choose the load unpacked extendtion and point to the folder where you have downloaded this git to.  The extension should now be available.
 
-The darken option is just an added option to make page text black and all link text dark blue and underlined to make the page easier to see for the user.  I personally find reading pages with light gray text difficult.
+The darken option is just an added option to make page text black and all link text dark blue and underlined to make the page easier to see for the user.  I personally find reading pages with light gray text difficult.  The enahanced focus indicator makes it easier to track what element has keyboard focus.
 
 <table>
   <colgroup>
@@ -176,10 +176,15 @@ The darken option is just an added option to make page text black and all link t
   <td>ul</td>
   <Td>purple</td>
 </tr>
-<Tr>
+<tr>
   <td>title attribute</td>
   <td>none</td>
   <td>dotted gray border</td>
+</tr>
+<tr>
+  <td>tabindex attribute</td>
+  <td>tbx (does not always show)</td>
+  <td>dotted blue border</td>
 </tr>
   <Td>video</td>
   <td>none</td>
