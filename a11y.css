@@ -27,6 +27,10 @@ a, area {
   border: thin solid cyan !important;  
 }
 
+p[onclick], div[onclick], span[onclick], th[onclick], td[onclick] {
+  border: thin dashed cyan !important;  
+}
+
 /* atempt to provide some spacing around image so we can see link border */
 /* a img {
   margin:1em;
@@ -353,6 +357,8 @@ table::before {
 
 table[summary]::before {
   content: attr(summary) !important;
+  background-color:red !important;
+  color:white;
   padding-right:.25em !important;     
 }
 
@@ -467,7 +473,7 @@ nav::before, [role="navigation"]::before {
 }
 
 aside::before, [role="complementary"]::before {
-  content: "aside" !important;
+  content: "asd" !important;
   font-size:small !important;
   font-style:italic !important;
   border:darkblue !important;
@@ -575,7 +581,7 @@ input[type="image"] {
 }
 
 /* only lists inline event handlers */
-div[onclick]::before, span[onclick]::before, th[onclick]::before. td[onclick]::before {
+p[onclick]::before, div[onclick]::before, span[onclick]::before, th[onclick]::before, td[onclick]::before {
   content: "oc" !important;
   font-size:small !important;
   font-style:italic !important;
