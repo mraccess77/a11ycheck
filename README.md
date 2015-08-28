@@ -13,7 +13,7 @@ The darken option is just an added option to make page text black and all link t
   </colgroup>  
   <thead>
     <tr>
-      <th>Element</th> 
+      <th style="width:20%;">Element</th> 
       <th>indicator</th>
       <th>border</th>
     </tr>
