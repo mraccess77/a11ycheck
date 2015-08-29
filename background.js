@@ -67,6 +67,12 @@ chrome.contextMenus.create({
 	"onclick" :  showTitles
 });
 
+chrome.contextMenus.create({
+	"title": "Show focus order",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showFocusOrder
+});
+
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
@@ -103,4 +109,8 @@ function showLang(info, tab) {
 
 function showTitles(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showTitles"}, function(response) { } );
+}
+
+function showFocusOrder(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showFocusOrder"}, function(response) { } );
 }
