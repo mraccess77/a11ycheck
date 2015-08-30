@@ -20,6 +20,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+	"title": "Blackout aria-hidden",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" : blackoutARIAHidden
+});
+
+chrome.contextMenus.create({
 	"title": "Remove styles",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  removeStyles
@@ -124,4 +130,8 @@ function showFocusOrder(info, tab) {
 
 function removeBackgroundImages(info, tab) {
 	chrome.tabs.insertCSS(null, {file:"removeBackgroundImages.css"} );  
+}
+
+function blackoutARIAHidden(info, tab) {
+	chrome.tabs.insertCSS(null, {file:"aria-hidden.css"} );  
 }
