@@ -17,7 +17,8 @@
     }
   ],
 	"web_accessible_resources": [
-			 "darken.js"
+			 "darken.js",
+			 "sr-only.js"
 	 ],
   "icons": {"32": "Acheck.png"}, 
 	"permissions": [

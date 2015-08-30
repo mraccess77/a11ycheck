@@ -24,6 +24,9 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "showFocusOrder") {
       showFocusOrder();
     }
+    else if (request.msg == "showSROnly") {
+      showSROnly();
+    }
   } 
 );
 
@@ -76,13 +79,23 @@ function showLang() {
   document.head.appendChild(element);   
 }
 
+// ************************************************************************
 function showTitles() {
-  //var str = chrome.extension.getURL('title_attribute.js');
+  //var str = chrome.extension.getURL('showSROnly.js');
   var element = document.createElement('script');
   element.src = "https://mraccess77.github.io/favlets/title_attribute.js";
   document.head.appendChild(element);   
 }
 
+// ***********************************************************************
+function showSROnly() {
+  var str = chrome.extension.getURL('sr-only.js');
+  var element = document.createElement('script');
+  element.src = str
+  document.head.appendChild(element);   
+}
+
+// *****************************************************************************
 function showFocusOrder() {
   var nl = document.querySelectorAll("[tabindex], button, a[href], area, input, select, textarea, iframe");
   var ar = []
@@ -138,6 +151,7 @@ function showFocusOrder() {
 
 }
 
+// ********************************************************
 function showAlt() {
 
   var col = document.getElementsByTagName('img');

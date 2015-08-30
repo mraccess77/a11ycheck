@@ -75,6 +75,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+	"title": "Show class sr-only",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" : showSROnly
+});
+
+chrome.contextMenus.create({
 	"title": "Enhanced Focus",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  enhancedFocus
@@ -134,4 +140,9 @@ function removeBackgroundImages(info, tab) {
 
 function blackoutARIAHidden(info, tab) {
 	chrome.tabs.insertCSS(null, {file:"aria-hidden.css"} );  
+}
+
+
+function showSROnly(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showSROnly"}, function(response) { } );
 }
