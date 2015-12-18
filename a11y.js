@@ -27,7 +27,10 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "showSROnly") {
       showSROnly();
     }
-  } 
+    else if (request.msg == "showResponsive") {
+	  showResponsive();
+    }
+  }
 );
 
  // 'chrome-extension://__MSG_@@extension_id__/darken.js'
@@ -36,11 +39,11 @@ chrome.runtime.onMessage.addListener(
   /*element.src = 'https://labs.ssbbartgroup.com/index.php?title=Darken.js&amp;action=raw&amp;ctype=text/javascript'; */
 
 function darkenPage() {
- 
+
   var str = chrome.extension.getURL('darken.js');
   var element = document.createElement('script');
   element.src = str;
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
 
 }
 
@@ -48,35 +51,35 @@ function showARIA() {
   //var str = chrome.extension.getURL('ARIAchecker.js');
   var element = document.createElement('script');
   element.src = "https://mraccess77.github.io/favlets/ARIAchecker.js";
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
 
 }
 
 function removeStyles () {
   var el = document.querySelectorAll('style,link');
   for (var i=0; i<el.length; i++) {
-    el[i].parentNode.removeChild(el[i]); 
+    el[i].parentNode.removeChild(el[i]);
   };
 
   var el = document.querySelectorAll('[style]');
   for (var i=0; i<el.length; i++) {
     el[i].style="";
   };
-  
+
 }
 
 function complexTables() {
   //var str = chrome.extension.getURL('complex_tables.js');
   var element = document.createElement('script');
   element.src = "https://mraccess77.github.io/favlets/complex_tables.js";
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
 }
 
 function showLang() {
   //var str = chrome.extension.getURL('lang.js');
   var element = document.createElement('script');
   element.src = "https://mraccess77.github.io/favlets/lang.js";
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
 }
 
 // ************************************************************************
@@ -84,7 +87,7 @@ function showTitles() {
   //var str = chrome.extension.getURL('showSROnly.js');
   var element = document.createElement('script');
   element.src = "https://mraccess77.github.io/favlets/title_attribute.js";
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
 }
 
 // ***********************************************************************
@@ -92,7 +95,25 @@ function showSROnly() {
   var str = chrome.extension.getURL('sr-only.js');
   var element = document.createElement('script');
   element.src = str
-  document.head.appendChild(element);   
+  document.head.appendChild(element);
+}
+
+// *****************************************************************************
+function showResponsive() {
+
+  var s = document.createElement('span');
+  var t = document.createTextNode("(scale) pixel ration " + window.devicePixelRatio + "\n inner width " + window.innerWidth);
+  s.appendChild(t);
+  s.style.backgroundColor = 'darkblue';
+  s.style.color = 'white';
+  s.style.fontSize = "small";
+  s.style.position = "absolute";
+  s.style.left = "1em";
+  s.style.top = "1em";
+  s.style.zIndex = "9999";
+  s.style.opacity = "1";
+  document.body.insertBefore(s,document.body.firstChild);
+alert('jon');
 }
 
 // *****************************************************************************
@@ -157,22 +178,22 @@ function showAlt() {
   var col = document.getElementsByTagName('img');
 
   for (var i=0; i < col.length; i++) {
-  //alert(col.length);     
-  
+  //alert(col.length);
+
      if ( col[i].hasAttribute("aria-label") ) {
 
       var text = document.createTextNode("aria-label=" + col[i].getAttribute('aria-label'));
      }
-     else if ( col[i].hasAttribute("alt") ) { 
+     else if ( col[i].hasAttribute("alt") ) {
        var text = document.createTextNode("alt=" + col[i].alt);
      }
-     else if ( col[i].hasAttribute("title") ) { 
+     else if ( col[i].hasAttribute("title") ) {
        var text = document.createTextNode("title=" + col[i].title);
      }
      else {
        var text = document.createTextNode("No alt");
      }
-   
+
      var node = document.createElement("span");
      node.style.color = "black";
      node.style.backgroundColor = "pink";
@@ -186,8 +207,8 @@ function showAlt() {
   var col = document.getElementsByTagName('svg');
 
   for (var i=0; i < col.length; i++) {
-  //alert(col.length);     
-  
+  //alert(col.length);
+
      if ( col[i].hasAttribute("aria-label") ) {
 
       var text = document.createTextNode("SVG aria-label=" + col[i].getAttribute('aria-label'));
@@ -195,7 +216,7 @@ function showAlt() {
      else {
        var text = document.createTextNode("SVG No alt");
      }
-   
+
      var node = document.createElement("span");
      node.style.color = "black";
      node.style.backgroundColor = "pink";
@@ -208,14 +229,14 @@ function showAlt() {
      node.appendChild(text);
      col[i].parentNode.insertBefore(node, col[i]);
   }
-  
+
     var col = document.getElementsByTagName('video');
-	
+
 	  for (var i=0; i < col.length; i++) {
-	  //alert(col.length);     
-	  
+	  //alert(col.length);
+
        var text = document.createTextNode("V");
-	   
+
 	     var node = document.createElement("span");
 	     node.style.color = "black";
 	     node.style.backgroundColor = "yellow";
