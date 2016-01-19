@@ -113,7 +113,6 @@ function showResponsive() {
   s.style.zIndex = "9999";
   s.style.opacity = "1";
   document.body.insertBefore(s,document.body.firstChild);
-alert('jon');
 }
 
 // *****************************************************************************
