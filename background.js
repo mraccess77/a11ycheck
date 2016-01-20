@@ -164,7 +164,7 @@ function showSROnly(info, tab) {
 }
 
 function speakSelection(info, tab) {
-console.log('jon');
+// console.log('jon');
 
 /*
 chrome.tts.getVoices(
@@ -179,15 +179,19 @@ chrome.tts.getVoices(
             }
           });
 */
-  chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );  
+ // console.log("yes");
+ chrome.tabs.query ( { active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );  
+ });
 }
 
 function speakSelectionHelper(response) {
-  console.log("hello");
+  // console.log("hello");
   var utterance = "no selection";
-  utterance = response.resp;
+  utterance = response.resp.toString();
+  console.log(utterance);
   var options = {"rate": 1.75};
-  	chrome.tts.speak("jon");
+  chrome.tts.speak("jon");
 	chrome.tts.speak(
           utterance,
           {'lang': 'en-US', 'rate': 1.75},

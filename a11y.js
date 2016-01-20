@@ -30,10 +30,14 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "getSelection") {
       var sel = getMySelection();
       sendResponse({resp:sel.toString()} );
+      // console.log("test");
+      //sendResponse({resp:"test"});
+	    return true;       
     }
     else if (request.msg == "showResponsive") {
 	    showResponsive();
     }
+  }
 
 );
 
