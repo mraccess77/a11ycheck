@@ -92,6 +92,12 @@ chrome.contextMenus.create({
 	"onclick" :  darken
 });
 
+chrome.contextMenus.create({
+	"title": "Speak Selection",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  speakSelection
+});
+
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
@@ -145,4 +151,40 @@ function blackoutARIAHidden(info, tab) {
 
 function showSROnly(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showSROnly"}, function(response) { } );
+}
+
+function speakSelection(info, tab) {
+console.log('jon');
+
+/*
+chrome.tts.getVoices(
+          function(voices) {
+            for (var i = 0; i < voices.length; i++) {
+              console.log('Voice ' + i + ':');
+              console.log('  name: ' + voices[i].voiceName);
+              console.log('  lang: ' + voices[i].lang);
+              console.log('  gender: ' + voices[i].gender);
+              console.log('  extension id: ' + voices[i].extensionId);
+              console.log('  event types: ' + voices[i].eventTypes);
+            }
+          });
+*/
+  chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );  
+}
+
+function speakSelectionHelper(response) {
+  console.log("hello");
+  var utterance = "no selection";
+  utterance = response.resp;
+  var options = {"rate": 1.75};
+  	chrome.tts.speak("jon");
+	chrome.tts.speak(
+          utterance,
+          {'lang': 'en-US', 'rate': 1.75},
+          function() {
+            if (chrome.runtime.lastError) {
+              console.log('Error: ' + chrome.runtime.lastError.message);
+            }
+          } );  
+
 }

@@ -27,6 +27,10 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "showSROnly") {
       showSROnly();
     }
+    else if (request.msg == "getSelection") {
+      var sel = getMySelection();
+      sendResponse({resp:sel.toString()} );
+    }
   } 
 );
 
@@ -35,8 +39,8 @@ chrome.runtime.onMessage.addListener(
 //  chrome.tabs.executeScript(null, {file: "a11y.js"}, null);
   /*element.src = 'https://labs.ssbbartgroup.com/index.php?title=Darken.js&amp;action=raw&amp;ctype=text/javascript'; */
 
+// not called
 function darkenPage() {
- 
   var str = chrome.extension.getURL('darken.js');
   var element = document.createElement('script');
   element.src = str;
@@ -91,8 +95,14 @@ function showTitles() {
 function showSROnly() {
   var str = chrome.extension.getURL('sr-only.js');
   var element = document.createElement('script');
-  element.src = str
+  element.src = str;
   document.head.appendChild(element);   
+}
+
+// ****************************************************************
+function getMySelection() {
+   console.log("kim");
+   return window.getSelection().toString();
 }
 
 // *****************************************************************************

@@ -28,6 +28,7 @@
    "http://*/*", 
    "https://*/*", 
    "file://*/*",
-   "webRequest"
+   "webRequest",
+   "tts"
   ]
 }
