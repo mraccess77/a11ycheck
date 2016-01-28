@@ -190,11 +190,11 @@ function speakSelectionHelper(response) {
   var utterance = "no selection";
   utterance = response.resp.toString();
   console.log(utterance);
-  var options = {"rate": 1.75};
+  var options = {"rate": 1.4};
   chrome.tts.speak("jon");
 	chrome.tts.speak(
           utterance,
-          {'lang': 'en-US', 'rate': 1.75},
+          {'lang': 'en-US', 'rate': 1.4},
           function() {
             if (chrome.runtime.lastError) {
               console.log('Error: ' + chrome.runtime.lastError.message);
