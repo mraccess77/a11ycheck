@@ -35,6 +35,9 @@ chrome.runtime.onMessage.addListener(
 	    return true;       
     }
     else if (request.msg == "showResponsive") {
+		  window.onresize = function() {
+		  	    showResponsive();
+  		};    
 	    showResponsive();
     }
   }
@@ -109,17 +112,25 @@ function showSROnly() {
 // *****************************************************************************
 function showResponsive() {
 
+  var element = document.getElementById("ssb_responsive1");
+  if (element) {
+    element.parentNode.removeChild(element);
+  }
   var s = document.createElement('span');
+  s.id = "ssb_responsive1";
   var t = document.createTextNode("(scale) pixel ration " + window.devicePixelRatio + "\n inner width " + window.innerWidth);
   s.appendChild(t);
   s.style.backgroundColor = 'darkblue';
   s.style.color = 'white';
   s.style.fontSize = "small";
-  s.style.position = "absolute";
-  s.style.left = "1em";
-  s.style.top = "1em";
+  s.style.position = "fixed";
+  s.style.left = ".25em";
+  s.style.top = ".25em";
   s.style.zIndex = "9999";
   s.style.opacity = "1";
+  s.style.padding = ".25em";
+  s.style.fontWeight = "normal";
+  s.style.border = "thin inset white";
   document.body.insertBefore(s,document.body.firstChild);
 }
 
@@ -264,3 +275,5 @@ function showAlt() {
 	     col[i].parentNode.insertBefore(node, col[i]);
   }
 }
+
+// ***********************************************************
