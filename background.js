@@ -118,8 +118,9 @@ function responsive(info, tab) {
 }
 
 function enhancedFocus(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"enhancedFocus.css"} );
-}
+	//chrome.tabs.insertCSS(null, {file:"enhancedFocus.css"} );
+  chrome.tabs.sendMessage(tab.id, {msg:"enhanceFocus"}, function(response) { } );	
+}	
 
 // , function(response) { }
 function removeStyles(info, tab) {

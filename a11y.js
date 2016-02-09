@@ -40,6 +40,10 @@ chrome.runtime.onMessage.addListener(
   		};    
 	    showResponsive();
     }
+    else if (request.msg == "enhanceFocus") {
+	    enhanceFocus();
+    }
+
   }
 
 );
@@ -277,3 +281,31 @@ function showAlt() {
 }
 
 // ***********************************************************
+function enhanceFocus() {
+   enhanceFocusFrames(document);
+}
+
+function enhanceFocusFrames(doc) {
+	// check below
+	var path = chrome.extension.getURL('enhancedFocus.css');
+	var link = document.createElement("link");
+	link.rel = "stylesheet";
+	link.type = "text/css";
+	link.href = path;
+	doc.head.appendChild(link);
+	
+	// go through for each frame's document if there are any frames
+	var frametypes= ['frame','iframe'];
+	for (var i=0;i<frametypes.length;i++) {
+		var myframes=doc.getElementsByTagName(frametypes[i]);
+		for (var z=0;z<myframes.length;z++) {
+			try {
+		    enhanceFocusFrames(myframes[z].contentWindow.document);
+		  }
+		  catch(e) {
+		    console.log(e);
+		  }
+		}
+	}
+
+}
