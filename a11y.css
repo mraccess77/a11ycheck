@@ -89,6 +89,20 @@ label {
     border: thin solid gold !important;  
 }
 
+fieldset::before {
+  content: "fld" !important;
+  font-size:small !important;
+  font-style: italic !important;
+  border:darkblue !important;
+  background-color:lightgray !important;
+  color:black !important;
+  font-weight:bold !important;        
+}
+
+fieldset {
+      border: thin dotted brown !important;  
+}
+
 legend {
     border: thin dashed gold !important;  
 }
