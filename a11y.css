@@ -617,10 +617,26 @@ p[onclick]::before, div[onclick]::before, span[onclick]::before, th[onclick]::be
   font-weight:bold !important;  
 }
 
+/* only works on a very samll set of elements */
+[aria-label]:hover::before {
+  content: "aria-label:" attr(aria-label) !important;
+  font-size:small !important;
+  background-color:green !important;
+  color:white !important;  
+}
+
+/* only works on a very samll set of elements */
+[aria-labelledby]:hover::before {
+  content: "aria-labelledby:" attr(aria-labelledby) !important;
+  font-size:small !important;
+  background-color:green !important;
+  color:white !important;  
+}
+
 /* too verbose
 [title]::before {
   content: attr(title) !important;
-  font-size:xx-small !important;
+  font-size:small !important;
   background-color:green !important;
   color:white !important;
 } */
