@@ -1,7 +1,7 @@
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
 
-	chrome.tabs.insertCSS(null, {file:"a11y.css"} );
+	chrome.tabs.insertCSS(null, {file:"a11y.css", allFrames:true} );
 
   if (tab)
     chrome.tabs.sendMessage(tab.id, {msg:"alt"}, function(response) { } );
@@ -119,8 +119,8 @@ function responsive(info, tab) {
 
 function enhancedFocus(info, tab) {
 	//chrome.tabs.insertCSS(null, {file:"enhancedFocus.css"} );
-  chrome.tabs.sendMessage(tab.id, {msg:"enhanceFocus"}, function(response) { } );	
-}	
+  chrome.tabs.sendMessage(tab.id, {msg:"enhanceFocus"}, function(response) { } );
+}
 
 // , function(response) { }
 function removeStyles(info, tab) {
@@ -182,7 +182,7 @@ chrome.tts.getVoices(
 */
  // console.log("yes");
  chrome.tabs.query ( { active: true, currentWindow: true}, function(tabs) {
-  chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );  
+  chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
  });
 }
 
@@ -200,6 +200,6 @@ function speakSelectionHelper(response) {
             if (chrome.runtime.lastError) {
               console.log('Error: ' + chrome.runtime.lastError.message);
             }
-          } );  
+          } );
 
 }
