@@ -329,11 +329,27 @@ function showDOM() {
   node.style.wordWrap="break-word";
   document.body.appendChild(node);
 
+  // overlay border
   var overlay = document.createElement("div");
   overlay.style.pointerEvents="none";
   overlay.id = "__a11yoverlay";
   document.body.appendChild(overlay);
 
+  // close button
+  var close = document.createElement("div");
+  close.id = "__a11yclose";
+  close.title = "Close DOM inspector";
+  close.style.backgroundColor="black";
+  close.style.color="white";
+  close.style.position = "fixed";
+  close.style.right = 15-document.body.scrollLeft+"px";
+  close.style.top = "3px";
+  close.textContent="X";
+  close.style.padding = ".2em";
+  close.style.zIndex = "9999";
+  close.addEventListener("click", function() {document.getElementById("__a11yclose").style.display="none";document.getElementById("__a11yoverlay").style.display="none";document.getElementById("__a11ynode").style.display="none"; document.body.parentNode.removeEventListener("mousemove", updateDOM);} );
+  document.body.appendChild(close);
+  //console.log(window.innerWidth-30-document.body.scrollLeft);
 }
 
 /* ******************************************************************* */
@@ -353,7 +369,9 @@ function updateDOM(e) {
 	  node.textContent = "";
 	  var s = document.createElement("span");
 	  s.style.color = "darkred";
-	  s.textContent = e.target.parentNode.parentNode.tagName+">"+e.target.parentNode.tagName+">"+e.target.tagName;
+	  if ((e.target.parentNode) && (e.target.parentNode.parentNode))
+		  str = e.target.parentNode.parentNode.tagName
+	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName;
 	  node.appendChild(s);
 	  s = document.createElement("span");
 	  s.style.color = "darkblue";
@@ -384,7 +402,7 @@ function updateDOM(e) {
 	  // draw/update border
 	  overlay.style.position = "fixed";
 	  overlay.style.border = "thin solid red";
-	  console.log(e.target.tagName);
+	  //console.log(e.target.tagName);
 	  //console.log(e.target.offsetLeft);
 	  //console.log(document.body.scrollLeft);
 	  var rect = e.target.getBoundingClientRect();
@@ -400,20 +418,21 @@ function updateDOM(e) {
 
 	  // determine location of DOM info node on screen
 	  var compHeight = window.getComputedStyle(node,null).height;
-	  console.log(e.pageY);
+	  //console.log(e.pageY);
 	  if ((e.pageX+15-document.body.scrollLeft) < window.innerWidth - 200) {
 		node.style.left = e.pageX+15+"px";
 	  }
 	  else {
 		node.style.left = e.pageX-215+"px";
 	  }
-	  if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - parseInt(compHeight))) {
+	  if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - 100 - parseInt(compHeight))) {
 		  node.style.top = e.pageY+20+"px";
 	  }
 	  else {
 		node.style.top = window.innerHeight-compHeight+"px";
   	  }
 	 }
+	 // if no node to show then hide pop to obscure old information
 	 else {
 	   node.style.display="none";
 	 }
