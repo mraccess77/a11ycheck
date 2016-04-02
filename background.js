@@ -104,17 +104,27 @@ chrome.contextMenus.create({
 	"onclick" :  responsive
 });
 
+chrome.contextMenus.create({
+	"title": "Inspect DOM",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showDOM
+});
+
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
 
 function darken(info, tab) {
   // chrome.tabs.sendMessage(tab.id, {msg:"darken"}, function(response) { } );
-	chrome.tabs.insertCSS(null, {file:"darken.css"} );
+	chrome.tabs.insertCSS(null, {file:"darken.css", allFrames:true} );
 }
 
 function responsive(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showResponsive"}, function(response) { } );
+}
+
+function showDOM(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showDOM"}, function(response) { } );
 }
 
 function enhancedFocus(info, tab) {
@@ -128,11 +138,11 @@ function removeStyles(info, tab) {
 }
 
 function grayscale(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"grayscale.css"} );
+	chrome.tabs.insertCSS(null, {file:"grayscale.css", allFrames:true} );
 }
 
 function linearizeTables(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"linearizeTables.css"} );
+	chrome.tabs.insertCSS(null, {file:"linearizeTables.css", allFrames:true} );
 }
 
 function complexTables(info, tab) {
@@ -152,11 +162,11 @@ function showFocusOrder(info, tab) {
 }
 
 function removeBackgroundImages(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"removeBackgroundImages.css"} );
+	chrome.tabs.insertCSS(null, {file:"removeBackgroundImages.css", allFrames:true} );
 }
 
 function blackoutARIAHidden(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"aria-hidden.css"} );
+	chrome.tabs.insertCSS(null, {file:"aria-hidden.css", allFrames:true} );
 }
 
 

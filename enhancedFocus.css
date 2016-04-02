@@ -1,3 +1,7 @@
 *:focus {
   outline: red solid thick !important;
 }
+
+iframe:focus {
+  border: medium solid red !important;
+}

@@ -32,18 +32,20 @@ chrome.runtime.onMessage.addListener(
       sendResponse({resp:sel.toString()} );
       // console.log("test");
       //sendResponse({resp:"test"});
-	    return true;       
+	    return true;
     }
     else if (request.msg == "showResponsive") {
 		  window.onresize = function() {
 		  	    showResponsive();
-  		};    
+  		};
 	    showResponsive();
     }
     else if (request.msg == "enhanceFocus") {
 	    enhanceFocus();
     }
-
+	else if (request.msg == "showDOM") {
+	    showDOM();
+    }
   }
 
 );
@@ -140,7 +142,7 @@ function showResponsive() {
 
 // ****************************************************************
 function getMySelection() {
-   console.log("kim");
+   console.log("test");
    return window.getSelection().toString();
 }
 
@@ -293,7 +295,7 @@ function enhanceFocusFrames(doc) {
 	link.type = "text/css";
 	link.href = path;
 	doc.head.appendChild(link);
-	
+
 	// go through for each frame's document if there are any frames
 	var frametypes= ['frame','iframe'];
 	for (var i=0;i<frametypes.length;i++) {
@@ -308,4 +310,111 @@ function enhanceFocusFrames(doc) {
 		}
 	}
 
+}
+
+function showDOM() {
+  document.body.parentNode.addEventListener("mousemove", updateDOM);
+  node = document.createElement("div");
+  node.id = "__a11ynode";
+  node.style.position = "absolute";
+  node.style.display="block";
+  node.style.border = "thin solid black";
+  node.style.color = "darkblue";
+  node.style.maxWidth = "200px";
+  node.style.maxHeight = "200px";
+  node.style.overflowY = "scroll";
+  node.style.overflowX = "hidden";
+  node.style.backgroundColor = "white";
+  node.style.zIndex = "9999";
+  node.style.wordWrap="break-word";
+  document.body.appendChild(node);
+
+  var overlay = document.createElement("div");
+  overlay.style.pointerEvents="none";
+  overlay.id = "__a11yoverlay";
+  document.body.appendChild(overlay);
+
+}
+
+/* ******************************************************************* */
+function updateDOM(e) {
+	var node = document.getElementById("__a11ynode");
+	var overlay = document.getElementById("__a11yoverlay");
+	if ((e.target != document.body)
+		 && (e.target != document.body.parentNode)
+		 && (e.target != node) ) {
+	  node.style.display="block";
+
+      var str="";
+	  //node.textContent = e.target.outerHTML;
+
+	  //str = e.target.tagName + " text='" + e.target.innerText+"' ";
+	  // build DOM info to display
+	  node.textContent = "";
+	  var s = document.createElement("span");
+	  s.style.color = "darkred";
+	  s.textContent = e.target.parentNode.parentNode.tagName+">"+e.target.parentNode.tagName+">"+e.target.tagName;
+	  node.appendChild(s);
+	  s = document.createElement("span");
+	  s.style.color = "darkblue";
+	  s.textContent = " text='";
+	  node.appendChild(s);
+	  s = document.createElement("span");
+	  s.style.color = "darkgreen";
+	  s.textContent = e.target.innerText+"'";
+	  node.appendChild(s);
+
+	  // build attributes list
+	  for (var att, i = 0, atts = e.target.attributes, n = atts.length; i < n; i++){
+		att = atts[i];
+		s = document.createElement("span");
+	    s.style.color = "darkblue";
+	    s.textContent = att.nodeName+"=";
+	    node.appendChild(s);
+		s = document.createElement("span");
+	    s.style.color = "darkgreen";
+	    s.textContent = "'"+att.nodeValue+"' ";
+	    node.appendChild(s);
+
+		//str = str + att.nodeName+"='"+att.nodeValue+"' ";
+	  }
+
+	  //node.textContent = str;
+
+	  // draw/update border
+	  overlay.style.position = "fixed";
+	  overlay.style.border = "thin solid red";
+	  console.log(e.target.tagName);
+	  //console.log(e.target.offsetLeft);
+	  //console.log(document.body.scrollLeft);
+	  var rect = e.target.getBoundingClientRect();
+	  //d.style.left = e.target.offsetLeft+document.body.scrollLeft + "px";
+	  overlay.style.left = rect.left + document.body.scrollLeft + "px";
+	  //d.style.top = e.target.offsetTop+document.body.scrollTop + "px";
+      overlay.style.top = rect.top + document.body.scrollTop + "px";
+	  overlay.style.width = e.target.offsetWidth+"px";
+	  overlay.style.height = e.target.offsetHeight+"px";
+	  //console.log(d.style.width);
+	  //console.log(d.style.height);
+
+
+	  // determine location of DOM info node on screen
+	  var compHeight = window.getComputedStyle(node,null).height;
+	  console.log(e.pageY);
+	  if ((e.pageX+15-document.body.scrollLeft) < window.innerWidth - 200) {
+		node.style.left = e.pageX+15+"px";
+	  }
+	  else {
+		node.style.left = e.pageX-215+"px";
+	  }
+	  if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - parseInt(compHeight))) {
+		  node.style.top = e.pageY+20+"px";
+	  }
+	  else {
+		node.style.top = window.innerHeight-compHeight+"px";
+  	  }
+	 }
+	 else {
+	   node.style.display="none";
+	 }
 }
