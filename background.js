@@ -192,7 +192,8 @@ chrome.tts.getVoices(
 */
  // console.log("yes");
  chrome.tabs.query ( { active: true, currentWindow: true}, function(tabs) {
-  chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
+  //chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
+  chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );
  });
 }
 
