@@ -144,6 +144,7 @@ function showResponsive() {
 function getMySelection() {
    console.log("test");
    return window.getSelection().toString();
+   //return window.getSelection().textContent.toString();
 }
 
 // *****************************************************************************
@@ -284,7 +285,11 @@ function showAlt() {
 
 // ***********************************************************
 function enhanceFocus() {
-   enhanceFocusFrames(document);
+   //enhanceFocusFrames(document);
+  var str = chrome.extension.getURL('focus.js');
+  var element = document.createElement('script');
+  element.src = str
+  document.head.appendChild(element);
 }
 
 function enhanceFocusFrames(doc) {

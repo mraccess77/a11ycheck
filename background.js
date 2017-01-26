@@ -199,18 +199,95 @@ chrome.tts.getVoices(
 
 function speakSelectionHelper(response) {
   // console.log("hello");
-  var utterance = "no selection";
-  utterance = response.resp.toString();
-  console.log(utterance);
-  var options = {"rate": 1.4};
-  chrome.tts.speak("jon");
+	var utterance = "no selection";
+	utterance = response.resp.toString();
+	console.log(utterance);
+	var options = {"lang": "en-US", "rate": 1.4};
+	//chrome.tts.speak("jon", options);
+	chrome.tts.stop();
 	chrome.tts.speak(
           utterance,
-          {'lang': 'en-US', 'rate': 1.4},
+          {'lang': 'en-US','rate': 1.4},
           function() {
             if (chrome.runtime.lastError) {
               console.log('Error: ' + chrome.runtime.lastError.message);
             }
           } );
+		  
 
 }
+
+/*
+javascript:'READ SELECTED';(function () 
+{'use strict';
+var voices = window.speechSynthesis.getVoices();
+var sayit = function () {
+	var msg = new SpeechSynthesisUtterance();
+	msg.voice = voices[2];
+	msg.voiceURI = 'native';
+	msg.volume = 1;
+	msg.rate = 1.4;
+	msg.pitch = 0.7;
+	msg.lang = 'en-GB';
+	msg.onstart = function (event) {console.log('started');};
+	msg.onend = function (event) {console.log('Finished in ' + event.elapsedTime + ' seconds.');};
+	msg.onerror = function (event) {console.log('Errored ' + event);};msg.onpause = function (event) {
+		console.log('paused ' + event);};
+		msg.onboundary = function (event) {console.log('onboundary ' + event);};r
+	eturn msg;};
+	
+	var speekResponse = function (sel) 
+	{
+		var text = addPauses(sel).textContent;
+		window.speechSynthesis.cancel();
+		var sentences = text.split('.');
+		for (var i = 0; i < sentences.length; i++) {
+			var toSay = sayit();
+			toSay.text = sentences[i];
+			window.speechSynthesis.speak(toSay);
+		}
+	};
+	
+	function addPauses(sel) 
+	{
+		var el = document.createElement('div');
+		el.appendChild(sel.getRangeAt(0).cloneContents());
+		for (var i = 0; i < 10; i++) {
+			addMissingDots(el);
+		}
+		return el;
+	}
+	function addMissingDots(el) {
+		var els = el.querySelectorAll('p, li, ol, h1, h2, h3, h4, h5, h6, h7, div');
+		for (var i = 0; i < els.length; i++) {
+			var cont = els[i].textContent;
+			if (cont.length && cont.substr(cont.length - 1) !== '.') {
+				els[i].innerHTML += '.';
+			}
+		}
+			return el;
+		}
+		speekResponse(window.getSelection());
+	}
+	)();
+
+*/
+/*
+/ Create the utterance object
+var utterance = new SpeechSynthesisUtterance();
+utterance.text = 'Hello, World!';
+
+// optional parameters
+utterance.lang = 'en-GB'; // language, default is 'en-US'
+utterance.volume = 0.5;   // volume, from 0 to 1, default is 1
+utterance.rate = 0.8;     // speaking rate, default is 1 
+
+// speak it!
+*/
+/*
+var chunks = [];
+
+for (var i = 0, charsLength = str.length; i < charsLength; i += 3) {
+    chunks.push(str.substring(i, i + 3));
+}
+*/
