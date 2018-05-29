@@ -29,8 +29,9 @@ chrome.runtime.onMessage.addListener(
     }
     else if (request.msg == "getSelection") {
       var sel = getMySelection();
-      sendResponse({resp:sel.toString()} );
-      // console.log("test");
+      //sendResponse({resp:sel.toString()} );
+	  sendResponse({resp:sel} );
+      console.log(sel.toString());
       //sendResponse({resp:"test"});
 	    return true;
     }
@@ -117,19 +118,34 @@ function showSROnly() {
 
 // *****************************************************************************
 function showResponsive() {
-
   var element = document.getElementById("ssb_responsive1");
   if (element) {
     element.parentNode.removeChild(element);
   }
-  var s = document.createElement('span');
-  s.id = "ssb_responsive1";
-  var t = document.createTextNode("(scale) pixel ration " + window.devicePixelRatio + "\n inner width " + window.innerWidth);
+  var d = document.createElement('div');
+	var s = document.createElement('span');
+	var b1 = document.createElement("button");
+	b1.setAttribute("aria-expanded","true");
+	b1.appendChild(document.createTextNode("\u25BC"));
+	b1.addEventListener("click", function() {
+		if (this.getAttribute("aria-expanded") == "true") {
+       this.setAttribute("aria-expanded","false");
+			 s.style.display = "none";
+		}
+    else {
+       this.setAttribute("aria-expanded","true");			
+			 s.style.display = "inline";
+		}
+	});
+  d.id = "LA_responsive1";
+  var t = document.createTextNode("(scale) pixel ratio " + window.devicePixelRatio + "\n inner width " + window.innerWidth + "px");
   s.appendChild(t);
+	d.appendChild(b1);
+	d.appendChild(s);
   s.style.backgroundColor = 'darkblue';
   s.style.color = 'white';
   s.style.fontSize = "small";
-  s.style.position = "fixed";
+  s.style.position = "sticky";
   s.style.left = ".25em";
   s.style.top = ".25em";
   s.style.zIndex = "9999";
@@ -137,18 +153,108 @@ function showResponsive() {
   s.style.padding = ".25em";
   s.style.fontWeight = "normal";
   s.style.border = "thin inset white";
-  document.body.insertBefore(s,document.body.firstChild);
+  document.body.insertBefore(d,document.body.firstChild);
 }
 
 // ****************************************************************
 function getMySelection() {
    console.log("test");
-   return window.getSelection().toString();
-   //return window.getSelection().textContent.toString();
+   //return window.getSelection().toString();
+   console.log(window.getSelection().textContent);
+   return window.getSelection().textContent;
+   
 }
 
 // *****************************************************************************
+var gi_order = 1;
 function showFocusOrder() {
+	traverseFocusOrderFrames(document);
+}
+
+function traverseFocusOrderFrames(doc) {
+	// check for sr-only class in current document and then check it's frames
+      var nl = doc.querySelectorAll("[tabindex], button, a[href], area, input:not([type=hidden]) , select, textarea, iframe");	
+
+	  initFocusOrderHelper(doc,nl);
+		// go through for each frame's document if there are any frames
+		var frametypes= ['frame','iframe'];
+		for (var i=0; i<frametypes.length; i++) {
+			var myframes=doc.getElementsByTagName(frametypes[i]);
+			for (var z=0;z<myframes.length;z++) {
+				try {
+				  traverseFrames(myframes[z].contentWindow.document);
+			    }
+   				catch(e) {
+				}
+			}
+		}
+	}
+	
+	function initFocusOrderHelper(doc, nl) {
+		var ar = [];
+		var positive = [];
+		var ar_position = 0;
+		var positive_position = 0;
+
+		
+		for (var i=0; i < nl.length; i++) {
+			if (!nl[i].hasAttribute('disabled') ) {
+				
+				if (nl[i].hasAttribute('tabindex') ) {
+					if ( nl[i].getAttribute('tabindex') == 0 ) {
+						
+						ar[ar_position] = nl[i];
+						ar_position++;
+					}
+					else if ( parseInt(nl[i].getAttribute('tabindex')) > 0 ) {
+						positive[positive_position] = nl[i];
+						positive_position++;
+					}
+				}
+				else {  // no tabindex
+				
+					ar[ar_position] = nl[i];
+					ar_position++;
+				}
+			}
+		}
+    
+	
+		positive.sort(function(a, b) {
+			return parseInt(a.getAttribute('tabindex'),10) - parseInt(b.getAttribute("tabindex"),10);
+		});
+
+		for (var i=0; i < positive.length; i++) {
+			s = doc.createElement('span');
+			t = doc.createTextNode(gi_order);
+			gi_order++;
+			s.appendChild(t);
+			s.style.backgroundColor = 'darkblue';
+			s.style.color = 'white';
+			s.style.fontSize = "small";
+			s.style.paddingLeft = ".1em";
+			s.style.paddingRight = ".1em";
+			positive[i].style.border = "thin dotted darkblue ";
+			positive[i].parentNode.insertBefore(s,positive[i]);
+		}
+		for (var i=0; i < ar.length; i++) {
+			s = doc.createElement('span');
+			t = doc.createTextNode(gi_order);
+			gi_order++;
+			s.appendChild(t);
+			s.style.backgroundColor = 'darkblue';
+			s.style.color = 'white';
+			s.style.display = "inline-block";
+			s.style.fontSize = "small";
+			s.style.paddingLeft = ".1em";
+			s.style.paddingRight = ".1em";
+			ar[i].style.border = "thin dotted darkblue";
+			ar[i].parentNode.insertBefore(s,ar[i]);
+		}
+	}
+  
+
+/*
   var nl = document.querySelectorAll("[tabindex], button, a[href], area, input, select, textarea, iframe");
   var ar = []
   var ar_position = 0;
@@ -202,6 +308,7 @@ function showFocusOrder() {
   }
 
 }
+*/
 
 // ********************************************************
 function showAlt() {

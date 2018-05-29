@@ -193,21 +193,27 @@ chrome.tts.getVoices(
  // console.log("yes");
  chrome.tabs.query ( { active: true, currentWindow: true}, function(tabs) {
   //chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
-  chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );
+  //chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );
+  speakSelectionHelper({resp: info.selectionText});
  });
 }
 
 function speakSelectionHelper(response) {
   // console.log("hello");
 	var utterance = "no selection";
-	utterance = response.resp.toString();
+	try {	
+	  utterance = response.resp.toString();
+	}
+	catch (err) {
+	  console.log(err.message);
+	}
 	console.log(utterance);
-	var options = {"lang": "en-US", "rate": 1.4};
+	//var options = {"lang": "en-US", "rate": 2.2};
 	//chrome.tts.speak("jon", options);
 	chrome.tts.stop();
 	chrome.tts.speak(
           utterance,
-          {'lang': 'en-US','rate': 1.4},
+          {'lang': 'en-US','rate': 5},
           function() {
             if (chrome.runtime.lastError) {
               console.log('Error: ' + chrome.runtime.lastError.message);
