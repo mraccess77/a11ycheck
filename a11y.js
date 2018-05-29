@@ -118,7 +118,7 @@ function showSROnly() {
 
 // *****************************************************************************
 function showResponsive() {
-  var element = document.getElementById("ssb_responsive1");
+  var element = document.getElementById("__a11y_responsive1");
   if (element) {
     element.parentNode.removeChild(element);
   }
@@ -137,7 +137,7 @@ function showResponsive() {
 			 s.style.display = "inline";
 		}
 	});
-  d.id = "LA_responsive1";
+  d.id = "__a11y_responsive1";
   var t = document.createTextNode("(scale) pixel ratio " + window.devicePixelRatio + "\n inner width " + window.innerWidth + "px");
   s.appendChild(t);
 	d.appendChild(b1);
