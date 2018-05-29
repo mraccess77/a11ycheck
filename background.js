@@ -93,7 +93,13 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
-	"title": "Darken",
+	"title": "Show width and scale",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  responsive
+});
+
+chrome.contextMenus.create({
+	"title": "Make text darker",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  darken
 });
@@ -105,13 +111,7 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
-	"title": "Show width and scale",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  responsive
-});
-
-chrome.contextMenus.create({
-	"title": "Inspect DOM",
+	"title": "Inspect DOM (alpha)",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  showDOM
 });
