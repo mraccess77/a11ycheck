@@ -126,7 +126,7 @@ function showResponsive() {
 	var s = document.createElement('span');
 	var b1 = document.createElement("button");
 	b1.setAttribute("aria-expanded","true");
-	b1.setAttribute("style","background-color:darkblue !important; color: white !important;");
+	b1.setAttribute("style","background-color:darkblue !important; color: white !important; background-image: initial");
 	
 	b1.appendChild(document.createTextNode("\u25BC"));
 	b1.addEventListener("click", function() {
