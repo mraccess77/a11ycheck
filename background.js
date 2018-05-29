@@ -87,6 +87,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+	"title": "Text Spacing",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  textSpacing
+});
+
+chrome.contextMenus.create({
 	"title": "Darken",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  darken
@@ -112,6 +118,10 @@ chrome.contextMenus.create({
 
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
+}
+
+function textSpacing(info, tab) {
+	chrome.tabs.insertCSS(null, {file:"text_spacing.css", allFrames:true} );
 }
 
 function darken(info, tab) {

@@ -20,6 +20,7 @@
 			 "darken.js",
 			 "sr-only.js",
 			 "enhancedFocus.css",
+			 "text_spacing.css",
 			 "focus.js"
 	 ],
   "icons": {"32": "Acheck.png"}, 
