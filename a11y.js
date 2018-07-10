@@ -532,20 +532,26 @@ function updateDOM(e) {
 	  var compHeight = window.getComputedStyle(node,null).height;
 	  //console.log(e.pageY);
 	  if ((e.pageX+15-document.body.scrollLeft) < window.innerWidth - 200) {
-		node.style.left = e.pageX+15+"px";
+		  node.style.left = e.pageX+15+"px";
 	  }
 	  else {
-		node.style.left = e.pageX-215+"px";
+		  node.style.left = e.pageX-215+"px";
 	  }
-	  if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - 100 - parseInt(compHeight))) {
-		  node.style.top = e.pageY+20+"px";
+	  //if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - 100 - parseInt(compHeight))) {
+		if ((parseInt(e.clientY) + parseInt(compHeight)+20) > window.innerHeight) {
+		  //node.style.top = rect.top + e.pageY+20+"px";
+			node.style.top = (parseInt(e.pageY)-20-parseInt(compHeight))+"px";
+			console.log(parseInt(e.clientY)+parseInt(compHeight));
 	  }
 	  else {
-		node.style.top = window.innerHeight-compHeight+"px";
+		  //node.style.top = rect.top + window.innerHeight-compHeight+"px";
+			node.style.top = e.pageY+20+"px";
+			//console.log(e.pageY);
+			//console.log(window.innerHeight);
   	  }
 	 }
 	 // if no node to show then hide pop to obscure old information
-	 else {
+	 else { // on body
 	   node.style.display="none";
 	 }
 }
