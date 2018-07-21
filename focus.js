@@ -75,7 +75,7 @@
 		  console.log("init helper");
 	     var overlay = doc.createElement("div");
 		 overlay.style.position = "fixed";
-		 overlay.style.border = "medium solid red";
+		 overlay.style.border = "medium solid magenta";
 		 overlay.style.zIndex = "9999";
 		 overlay.id = "SSB";
 		 overlay.setAttribute("data-lostFocus","false");

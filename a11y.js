@@ -464,6 +464,15 @@ function showDOM() {
   //console.log(window.innerWidth-30-document.body.scrollLeft);
 }
 
+function hexc(rgb) {
+ rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+ return (rgb && rgb.length === 4) ? "#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+
+}
+
 /* ******************************************************************* */
 function updateDOM(e) {
 	var node = document.getElementById("__a11ynode");
@@ -480,11 +489,46 @@ function updateDOM(e) {
 	  // build DOM info to display
 	  node.textContent = "";
 	  var s = document.createElement("span");
+		var c = document.createElement("span");
+		c.style.display = "inline-block";
+		c.style.width = ".9em";
+		c.style.height = ".9em";
+		c.style.backgroundColor = window.getComputedStyle(e.target).getPropertyValue("color");
 	  s.style.color = "darkred";
 	  if ((e.target.parentNode) && (e.target.parentNode.parentNode))
 		  str = e.target.parentNode.parentNode.tagName
-	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName;
-	  node.appendChild(s);
+	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName+" ";
+		node.appendChild(c);
+		cn = document.createElement("span");
+	  cn.textContent = " "+hexc(window.getComputedStyle(e.target).getPropertyValue("color"))+" ";
+		role = document.createElement("span");
+		role.style.color = "black";
+		if (e.target.hasAttribute("role")) 
+			role.textContent = "role=" + e.target.getAttribute("role")+" "; 
+		else
+			role.textContent = "role NS ";
+		var props = calcNames(e.target);
+		accName = document.createElement("span");
+		accName.style.color = "darkblue";
+		accName.textContent = "accName:";
+		accNameValue = document.createElement("span");
+		accNameValue.style.color = "green"; 
+		accNameValue.textContent = props.name+" ";
+		accDescription = document.createElement("span");
+		accDescription.style.color = "darkblue";
+		accDescription.textContent = "accDesc:";
+		accDescriptionValue = document.createElement("span");
+		accDescriptionValue.style.color = "green";
+		accDescriptionValue.textContent = props.desc+" ";
+		//accname.textContent = getNames(e.target)+" ";
+		
+		node.appendChild(cn);
+		node.appendChild(role);
+		node.appendChild(accName);
+		node.appendChild(accNameValue);
+		node.appendChild(accDescription);
+		node.appendChild(accDescriptionValue);
+		node.appendChild(s);
 	  s = document.createElement("span");
 	  s.style.color = "darkblue";
 	  s.textContent = " text='";
@@ -492,6 +536,7 @@ function updateDOM(e) {
 	  s = document.createElement("span");
 	  s.style.color = "darkgreen";
 	  s.textContent = e.target.innerText+"'";
+		
 	  node.appendChild(s);
 
 	  // build attributes list
