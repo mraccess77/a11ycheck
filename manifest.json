@@ -23,7 +23,8 @@
 			 "text_spacing.css",
 			 "focus.js",
 			 "headingstructure.js",
-			 "recursion.js"
+			 "recursion.js",
+			 "listoflinks.js"
 	 ],
   "icons": {"32": "Acheck.png"}, 
 	"permissions": [

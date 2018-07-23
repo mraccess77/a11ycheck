@@ -30,6 +30,10 @@ chrome.runtime.onMessage.addListener(
 		else if (request.msg == "showHeadingStructure") {
 			showHeadingStructure();
 		}
+		else if (request.msg == "showListOfLinks") {
+			showListOfLinks();
+		}
+				
     else if (request.msg == "getSelection") {
       var sel = getMySelection();
       //sendResponse({resp:sel.toString()} );
@@ -92,6 +96,17 @@ function removeStyles () {
 function showHeadingStructure() {
   var str2 = chrome.extension.getURL('recursion.js');
 	var str = chrome.extension.getURL('headingstructure.js');
+	var element2 = document.createElement('script');
+	var element1 = document.createElement('script');
+	element2.src = str2;
+  document.head.appendChild(element2);
+	element1.src = str;
+  document.head.appendChild(element1);
+}
+
+function showListOfLinks() {
+  var str2 = chrome.extension.getURL('recursion.js');
+	var str = chrome.extension.getURL('listoflinks.js');
 	var element2 = document.createElement('script');
 	var element1 = document.createElement('script');
 	element2.src = str2;

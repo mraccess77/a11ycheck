@@ -26,6 +26,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+	"title": "Show List of Links",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showListOfLinks
+});
+
+chrome.contextMenus.create({
 	"title": "Show ARIA markup",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" : showARIA
@@ -130,6 +136,10 @@ function showARIA(info, tab) {
 
 function showHeadingStructure(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showHeadingStructure"}, function(response) { } );
+}
+
+function showListOfLinks(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showListOfLinks"}, function(response) { } );
 }
 
 function textSpacing(info, tab) {
