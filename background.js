@@ -14,6 +14,24 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 chrome.contextMenus.create({
+	"title": "Inspect DOM",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showDOM
+});
+
+chrome.contextMenus.create({
+	"title": "Show Heading Structure",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showHeadingStructure
+});
+
+chrome.contextMenus.create({
+	"title": "Show List of Links",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showListOfLinks
+});
+
+chrome.contextMenus.create({
 	"title": "Show ARIA markup",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" : showARIA
@@ -92,6 +110,7 @@ chrome.contextMenus.create({
 	"onclick" :  textSpacing
 });
 
+/*
 chrome.contextMenus.create({
 	"title": "Show width and scale",
 	"contexts": ["all", "page", "selection", "image", "link"],
@@ -109,6 +128,7 @@ chrome.contextMenus.create({
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  darken
 });
+*/
 
 chrome.contextMenus.create({
 	"title": "Speak Selection",
@@ -122,14 +142,25 @@ chrome.contextMenus.create({
 	"onclick" :  showDOM
 });
 
+<<<<<<< HEAD
 chrome.contextMenus.create({
 	"title": "Show iFrames",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  showIFrames
 });
 
+=======
+>>>>>>> e5590d3efe11434962c2a4b88db8d8aac48b31e0
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
+}
+
+function showHeadingStructure(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showHeadingStructure"}, function(response) { } );
+}
+
+function showListOfLinks(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showListOfLinks"}, function(response) { } );
 }
 
 function textSpacing(info, tab) {

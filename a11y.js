@@ -27,6 +27,13 @@ chrome.runtime.onMessage.addListener(
     else if (request.msg == "showSROnly") {
       showSROnly();
     }
+		else if (request.msg == "showHeadingStructure") {
+			showHeadingStructure();
+		}
+		else if (request.msg == "showListOfLinks") {
+			showListOfLinks();
+		}
+				
     else if (request.msg == "getSelection") {
       var sel = getMySelection();
       //sendResponse({resp:sel.toString()} );
@@ -85,6 +92,28 @@ function removeStyles () {
     el[i].style="";
   };
 
+}
+
+function showHeadingStructure() {
+  var str2 = chrome.extension.getURL('recursion.js');
+	var str = chrome.extension.getURL('headingstructure.js');
+	var element2 = document.createElement('script');
+	var element1 = document.createElement('script');
+	element2.src = str2;
+  document.head.appendChild(element2);
+	element1.src = str;
+  document.head.appendChild(element1);
+}
+
+function showListOfLinks() {
+  var str2 = chrome.extension.getURL('recursion.js');
+	var str = chrome.extension.getURL('listoflinks.js');
+	var element2 = document.createElement('script');
+	var element1 = document.createElement('script');
+	element2.src = str2;
+  document.head.appendChild(element2);
+	element1.src = str;
+  document.head.appendChild(element1);
 }
 
 function complexTables() {
@@ -474,6 +503,15 @@ function showDOM() {
   //console.log(window.innerWidth-30-document.body.scrollLeft);
 }
 
+function hexc(rgb) {
+ rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+ return (rgb && rgb.length === 4) ? "#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+
+}
+
 /* ******************************************************************* */
 function updateDOM(e) {
 	var node = document.getElementById("__a11ynode");
@@ -490,11 +528,46 @@ function updateDOM(e) {
 	  // build DOM info to display
 	  node.textContent = "";
 	  var s = document.createElement("span");
+		var c = document.createElement("span");
+		c.style.display = "inline-block";
+		c.style.width = ".9em";
+		c.style.height = ".9em";
+		c.style.backgroundColor = window.getComputedStyle(e.target).getPropertyValue("color");
 	  s.style.color = "darkred";
 	  if ((e.target.parentNode) && (e.target.parentNode.parentNode))
 		  str = e.target.parentNode.parentNode.tagName
-	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName;
-	  node.appendChild(s);
+	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName+" ";
+		node.appendChild(c);
+		cn = document.createElement("span");
+	  cn.textContent = " "+hexc(window.getComputedStyle(e.target).getPropertyValue("color"))+" ";
+		role = document.createElement("span");
+		role.style.color = "black";
+		if (e.target.hasAttribute("role")) 
+			role.textContent = "role=" + e.target.getAttribute("role")+" "; 
+		else
+			role.textContent = "role NS ";
+		var props = calcNames(e.target);
+		accName = document.createElement("span");
+		accName.style.color = "darkblue";
+		accName.textContent = "accName:";
+		accNameValue = document.createElement("span");
+		accNameValue.style.color = "green"; 
+		accNameValue.textContent = props.name+" ";
+		accDescription = document.createElement("span");
+		accDescription.style.color = "darkblue";
+		accDescription.textContent = "accDesc:";
+		accDescriptionValue = document.createElement("span");
+		accDescriptionValue.style.color = "green";
+		accDescriptionValue.textContent = props.desc+" ";
+		//accname.textContent = getNames(e.target)+" ";
+		
+		node.appendChild(cn);
+		node.appendChild(role);
+		node.appendChild(accName);
+		node.appendChild(accNameValue);
+		node.appendChild(accDescription);
+		node.appendChild(accDescriptionValue);
+		node.appendChild(s);
 	  s = document.createElement("span");
 	  s.style.color = "darkblue";
 	  s.textContent = " text='";
@@ -502,6 +575,7 @@ function updateDOM(e) {
 	  s = document.createElement("span");
 	  s.style.color = "darkgreen";
 	  s.textContent = e.target.innerText+"'";
+		
 	  node.appendChild(s);
 
 	  // build attributes list
@@ -542,20 +616,26 @@ function updateDOM(e) {
 	  var compHeight = window.getComputedStyle(node,null).height;
 	  //console.log(e.pageY);
 	  if ((e.pageX+15-document.body.scrollLeft) < window.innerWidth - 200) {
-		node.style.left = e.pageX+15+"px";
+		  node.style.left = e.pageX+15+"px";
 	  }
 	  else {
-		node.style.left = e.pageX-215+"px";
+		  node.style.left = e.pageX-215+"px";
 	  }
-	  if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - 100 - parseInt(compHeight))) {
-		  node.style.top = e.pageY+20+"px";
+	  //if ((e.pageY+15-document.body.scrollTop) < (window.innerHeight - 100 - parseInt(compHeight))) {
+		if ((parseInt(e.clientY) + parseInt(compHeight)+20) > window.innerHeight) {
+		  //node.style.top = rect.top + e.pageY+20+"px";
+			node.style.top = (parseInt(e.pageY)-20-parseInt(compHeight))+"px";
+			console.log(parseInt(e.clientY)+parseInt(compHeight));
 	  }
 	  else {
-		node.style.top = window.innerHeight-compHeight+"px";
+		  //node.style.top = rect.top + window.innerHeight-compHeight+"px";
+			node.style.top = e.pageY+20+"px";
+			//console.log(e.pageY);
+			//console.log(window.innerHeight);
   	  }
 	 }
 	 // if no node to show then hide pop to obscure old information
-	 else {
+	 else { // on body
 	   node.style.display="none";
 	 }
 }
