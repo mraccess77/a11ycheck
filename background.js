@@ -99,6 +99,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+	"title": "Show iFrames",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showIFrames
+});
+
+chrome.contextMenus.create({
 	"title": "Make text darker",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  darken
@@ -114,6 +120,12 @@ chrome.contextMenus.create({
 	"title": "Inspect DOM (alpha)",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  showDOM
+});
+
+chrome.contextMenus.create({
+	"title": "Show iFrames",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showIFrames
 });
 
 function showARIA(info, tab) {
@@ -182,6 +194,10 @@ function blackoutARIAHidden(info, tab) {
 
 function showSROnly(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showSROnly"}, function(response) { } );
+}
+
+function showIFrames(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showIFrames"}, function(response) { } );
 }
 
 function speakSelection(info, tab) {

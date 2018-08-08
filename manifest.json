@@ -21,7 +21,8 @@
 			 "sr-only.js",
 			 "enhancedFocus.css",
 			 "text_spacing.css",
-			 "focus.js"
+			 "focus.js",
+			 "iFrames.js"
 	 ],
   "icons": {"32": "Acheck.png"}, 
 	"permissions": [

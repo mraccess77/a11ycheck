@@ -47,8 +47,10 @@ chrome.runtime.onMessage.addListener(
 	else if (request.msg == "showDOM") {
 	    showDOM();
     }
+	else if (request.msg == "showIFrames") {
+		showIFrames();
+	}
   }
-
 );
 
  // 'chrome-extension://__MSG_@@extension_id__/darken.js'
@@ -62,7 +64,6 @@ function darkenPage() {
   var element = document.createElement('script');
   element.src = str;
   document.head.appendChild(element);
-
 }
 
 function showARIA() {
@@ -113,6 +114,13 @@ function showSROnly() {
   var str = chrome.extension.getURL('sr-only.js');
   var element = document.createElement('script');
   element.src = str
+  document.head.appendChild(element);
+}
+
+function showIFrames() {
+  var str = chrome.extension.getURL('iFrames.js');
+  var element = document.createElement('script');
+  element.src = str;
   document.head.appendChild(element);
 }
 
