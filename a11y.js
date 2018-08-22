@@ -200,6 +200,7 @@ function showFocusOrder() {
 	traverseFocusOrderFrames(document);
 }
 
+// recursive focus order frame function
 function traverseFocusOrderFrames(doc) {
 	// check for sr-only class in current document and then check it's frames
       var nl = doc.querySelectorAll("[tabindex], button, a[href], area, input:not([type=hidden]) , select, textarea, iframe");	
@@ -219,6 +220,7 @@ function traverseFocusOrderFrames(doc) {
 		}
 	}
 	
+	// Focus order helper function 
 	function initFocusOrderHelper(doc, nl) {
 		var ar = [];
 		var positive = [];
@@ -339,6 +341,7 @@ function traverseFocusOrderFrames(doc) {
 }
 */
 
+// Show alt text for images
 // ********************************************************
 function showAlt() {
 
@@ -428,6 +431,9 @@ function enhanceFocus() {
   document.head.appendChild(element);
 }
 
+// ********************************************
+// not used any more because we can apply js which includes frames
+// ********************************************
 function enhanceFocusFrames(doc) {
 	// check below
 	var path = chrome.extension.getURL('enhancedFocus.css');
@@ -493,13 +499,32 @@ function showDOM() {
   //console.log(window.innerWidth-30-document.body.scrollLeft);
 }
 
+// give rgb get hex back
 function hexc(rgb) {
+	rgb = String(rgb);
+	//console.log(rgb);
  rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
  return (rgb && rgb.length === 4) ? "#" +
   ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
   ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
   ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
 
+}
+
+// walks through ancestors to get background color which is not inherited
+function getBackgroundColor(elem) {
+	
+    var transparent = 'rgba(0, 0, 0, 0)';
+    if (!elem) return transparent;
+console.log(getComputedStyle(elem).backgroundColor);
+    var bg = getComputedStyle(elem).backgroundColor;
+    if (bg === transparent) {
+			console.log(getComputedStyle(elem).backgroundColor);
+        return getBackgroundColor(elem.parentElement);
+				
+    } else {
+        return bg;
+    }
 }
 
 /* ******************************************************************* */
@@ -518,18 +543,34 @@ function updateDOM(e) {
 	  // build DOM info to display
 	  node.textContent = "";
 	  var s = document.createElement("span");
+		// c is for foreground color
 		var c = document.createElement("span");
+		var c1 = document.createElement("span");
 		c.style.display = "inline-block";
 		c.style.width = ".9em";
 		c.style.height = ".9em";
 		c.style.backgroundColor = window.getComputedStyle(e.target).getPropertyValue("color");
+		c1.style.display = "inline-block";
+		c1.style.width = ".9em";
+		c1.style.height = ".9em";
+		c1.style.backgroundColor = getBackgroundColor(e.target);
+		
+		// grandparent, parent, and element tag name string to display
 	  s.style.color = "darkred";
 	  if ((e.target.parentNode) && (e.target.parentNode.parentNode))
 		  str = e.target.parentNode.parentNode.tagName
 	  s.textContent = str+">"+e.target.parentNode.tagName+">"+e.target.tagName+" ";
+		
+		// append foreground and background color squares
 		node.appendChild(c);
+		node.appendChild(c1);
+		
+		// color hex values to display
 		cn = document.createElement("span");
 	  cn.textContent = " "+hexc(window.getComputedStyle(e.target).getPropertyValue("color"))+" ";
+		cn1 = document.createElement("span");
+	  cn1.textContent = " "+hexc(c1.style.backgroundColor)+" ";
+		
 		role = document.createElement("span");
 		role.style.color = "black";
 		if (e.target.hasAttribute("role")) 
@@ -552,6 +593,7 @@ function updateDOM(e) {
 		//accname.textContent = getNames(e.target)+" ";
 		
 		node.appendChild(cn);
+		node.appendChild(cn1);
 		node.appendChild(role);
 		node.appendChild(accName);
 		node.appendChild(accNameValue);
