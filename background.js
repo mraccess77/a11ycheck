@@ -142,15 +142,12 @@ chrome.contextMenus.create({
 	"onclick" :  showDOM
 });
 
-<<<<<<< HEAD
 chrome.contextMenus.create({
 	"title": "Show iFrames",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  showIFrames
 });
 
-=======
->>>>>>> e5590d3efe11434962c2a4b88db8d8aac48b31e0
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }

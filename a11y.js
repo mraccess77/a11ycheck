@@ -477,7 +477,7 @@ function showDOM() {
   node.style.display="block";
   node.style.border = "thin solid black";
   node.style.color = "darkblue";
-  node.style.maxWidth = "200px";
+  node.style.maxWidth = "300px";
   node.style.maxHeight = "200px";
   node.style.overflowY = "scroll";
   node.style.overflowX = "hidden";
@@ -681,3 +681,5 @@ function updateDOM(e) {
 	   node.style.display="none";
 	 }
 }
+
+// title, alt, value, aria*, placeholder, id, for, href, type
