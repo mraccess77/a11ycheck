@@ -54,8 +54,10 @@ chrome.runtime.onMessage.addListener(
 	else if (request.msg == "showDOM") {
 	    showDOM();
     }
+	else if (request.msg == "showIFrames") {
+		showIFrames();
+	}
   }
-
 );
 
  // 'chrome-extension://__MSG_@@extension_id__/darken.js'
@@ -69,7 +71,6 @@ function darkenPage() {
   var element = document.createElement('script');
   element.src = str;
   document.head.appendChild(element);
-
 }
 
 function showARIA() {
@@ -145,9 +146,16 @@ function showSROnly() {
   document.head.appendChild(element);
 }
 
+function showIFrames() {
+  var str = chrome.extension.getURL('iFrames.js');
+  var element = document.createElement('script');
+  element.src = str;
+  document.head.appendChild(element);
+}
+
 // *****************************************************************************
 function showResponsive() {
-  var element = document.getElementById("ssb_responsive1");
+  var element = document.getElementById("__a11y_responsive1");
   if (element) {
     element.parentNode.removeChild(element);
   }
@@ -155,6 +163,8 @@ function showResponsive() {
 	var s = document.createElement('span');
 	var b1 = document.createElement("button");
 	b1.setAttribute("aria-expanded","true");
+	b1.setAttribute("style","background-color:darkblue !important; color: white !important; background-image: initial");
+	
 	b1.appendChild(document.createTextNode("\u25BC"));
 	b1.addEventListener("click", function() {
 		if (this.getAttribute("aria-expanded") == "true") {
@@ -166,7 +176,7 @@ function showResponsive() {
 			 s.style.display = "inline";
 		}
 	});
-  d.id = "LA_responsive1";
+  d.id = "__a11y_responsive1";
   var t = document.createTextNode("(scale) pixel ratio " + window.devicePixelRatio + "\n inner width " + window.innerWidth + "px");
   s.appendChild(t);
 	d.appendChild(b1);

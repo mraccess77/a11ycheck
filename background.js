@@ -112,7 +112,19 @@ chrome.contextMenus.create({
 
 /*
 chrome.contextMenus.create({
-	"title": "Darken",
+	"title": "Show width and scale",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  responsive
+});
+
+chrome.contextMenus.create({
+	"title": "Show iFrames",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showIFrames
+});
+
+chrome.contextMenus.create({
+	"title": "Make text darker",
 	"contexts": ["all", "page", "selection", "image", "link"],
 	"onclick" :  darken
 });
@@ -125,11 +137,20 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
-	"title": "Show width and scale",
+	"title": "Inspect DOM (alpha)",
 	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  responsive
+	"onclick" :  showDOM
 });
 
+<<<<<<< HEAD
+chrome.contextMenus.create({
+	"title": "Show iFrames",
+	"contexts": ["all", "page", "selection", "image", "link"],
+	"onclick" :  showIFrames
+});
+
+=======
+>>>>>>> e5590d3efe11434962c2a4b88db8d8aac48b31e0
 function showARIA(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
 }
@@ -204,6 +225,10 @@ function blackoutARIAHidden(info, tab) {
 
 function showSROnly(info, tab) {
   chrome.tabs.sendMessage(tab.id, {msg:"showSROnly"}, function(response) { } );
+}
+
+function showIFrames(info, tab) {
+  chrome.tabs.sendMessage(tab.id, {msg:"showIFrames"}, function(response) { } );
 }
 
 function speakSelection(info, tab) {
