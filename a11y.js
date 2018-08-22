@@ -682,4 +682,4 @@ function updateDOM(e) {
 	 }
 }
 
-// title, alt, value, aria*, placeholder, id, for, href, type
+// title, alt, value, aria*, placeholder, id, for, href, type, tabindex
