@@ -72,7 +72,7 @@ dd.style.left = e.clientX-20+"px";
 
 function check(doc)	{	
 			var dl = document.getElementById("a11y_check_anchorlist").querySelector("dl");
-			var col = doc.querySelectorAll("a");
+			var col = doc.querySelectorAll("a, [role='link']");
 			col.forEach(c => {
 				if (!isAncestorDisplayNone(c))  {
 					 var dtHref = doc.createElement("dt");

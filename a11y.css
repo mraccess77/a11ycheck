@@ -1,6 +1,6 @@
 /* tabindex does not seem to work all of the time*/
 [tabindex]::before {
-  content: "tbx" + attr(tabindex) !important;
+  content: "tbx" attr(tabindex) !important;
 }
 
 [title] {
@@ -211,7 +211,7 @@ area::before {
 abbr::before {
   content: "abr" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:cyan !important;
   color:black !important;
   padding-right:.25em;  
@@ -220,7 +220,7 @@ abbr::before {
 audio::before {
   content: "aud" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:yellow !important;
   color:black !important;
   padding-right:.25em;  
@@ -229,7 +229,7 @@ audio::before {
 canvas::before {
   content: "can" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:pink !important;
   color:black !important;
   padding-right:.25em;  
@@ -238,7 +238,7 @@ canvas::before {
 caption::before {
   content: "cap" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:yellow !important;
   color:black !important;
   padding-right:.25em;  
@@ -283,7 +283,7 @@ dialog::before {
 h1::before {
   content: "h1" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:lightblue !important;
   color:black !important;
   padding-right:.25em;  
@@ -292,7 +292,7 @@ h1::before {
 h1::after {
   content: "h1" !important;
   font-size:small !important;
-  border:darkblue !importan!;
+  border:darkblue !important;
   background-color:lightblue !important;
   color:black !important;
   padding-right:.25em;  
@@ -356,7 +356,7 @@ h6::before {
   content: "h6" !important;
   font-size:small !important;
   border:darkblue !important;
-  background-color:lightlbue !important;
+  background-color:lightblue !important;
   color:black !important;  
   padding-right:.25em !important;  
 }
@@ -395,7 +395,7 @@ table[summary]::before {
   border:darkblue !important;
   background-color:sienna !important;
   color:white !important;  
-  font-weight:regular !important;  
+  font-weight:normal !important;  
   padding-right:.25em !important;    
 }
 
@@ -410,7 +410,7 @@ main::before, [role="main"]::before {
   padding-right:.25em !important;    
 }
 
-header::before, {
+header::before {
   content: "hdr" !important;
   font-size:small !important;
   font-style:italic !important;
@@ -421,7 +421,7 @@ header::before, {
   padding-right:.25em !important;    
 }
 
-footer::before, {
+footer::before {
   content: "ftr" !important;
   font-size:small !important;
   font-style:italic !important;
@@ -587,9 +587,6 @@ img::after {
 }
 
 /* input does not support before */
-input::before {
-
-}
 
 input[type="image"] {
   content: attr(alt) !important;
