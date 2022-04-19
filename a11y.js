@@ -521,6 +521,100 @@ function hexc(rgb) {
 
 }
 
+// **********************************************************************
+function getRatio(color1, color2)
+{
+    var color1, color2;
+    var l1; // higher value
+    var l2; // lower value
+    var l1R, l1G, l1B, l2R, l2G, l2B;
+
+	// remove pound sign if present
+	if (color2.indexOf('#') == 0) {
+	color2 = color2.substr(1, color2.length-1);
+	}
+	if (color1.indexOf('#') == 0) {
+			color1 = color1.substr(1, color1.length-1);
+	}
+
+    //Linearised R (for example) = (R/FS)^2.2 where FS is full scale value (255
+    //for 8 bit color channels). L1 is the higher value (of text or background)
+    //alert(parseInt("0x"+color1.substr(0,2)));
+    //Math.pow(n,x);
+    l1R = parseInt("0x"+color1.substr(0,2))/255;
+    if (l1R <= 0.03928)
+        {
+            l1R = l1R/12.92;
+        }
+    else
+        {
+            l1R = Math.pow(((l1R+0.055)/1.055),2.4);
+        }
+    l1G = parseInt("0x"+color1.substr(2,2))/255;
+    if (l1G <= 0.03928)
+        {
+            l1G = l1G/12.92;
+        }
+    else
+        {
+            l1G = Math.pow(((l1G+0.055)/1.055),2.4);
+        }
+    l1B = parseInt("0x"+color1.substr(4,2))/255;
+    if (l1B <= 0.03928)
+        {
+            l1B = l1B/12.92;
+        }
+    else
+        {
+            l1B = Math.pow(((l1B+0.055)/1.055),2.4);
+        }
+    l2R = parseInt("0x"+color2.substr(0,2))/255;
+    if (l2R <= 0.03928)
+        {
+            l2R = l2R/12.92;
+        }
+    else
+        {
+            l2R = Math.pow(((l2R+0.055)/1.055),2.4);
+        }
+    l2G = parseInt("0x"+color2.substr(2,2))/255;
+    if (l2G <= 0.03928)
+        {
+            l2G = l2G/12.92;
+        }
+    else
+        {
+            l2G = Math.pow(((l2G+0.055)/1.055),2.4);
+        }
+    l2B = parseInt("0x"+color2.substr(4,2))/255;
+    if (l2B <= 0.03928)
+        {
+            l2B = l2B/12.92;
+        }
+    else
+        {
+            l2B = Math.pow(((l2B+0.055)/1.055),2.4);
+        }
+    //where L is luminosity and is defined as
+    l1 = (.2126*l1R) + (.7152*l1G) + (.0722*l1B); //using linearised R, G, and B value
+    l2 = (.2126*l2R) + (.7152*l2G) + (.0722*l2B); //using linearised R, G, and B value
+    //and L2 is the lower value.
+    l1 = l1 + .05;
+    l2 = l2 + .05;
+    if (l1 < l2)
+        {
+            temp = l1;
+            l1 = l2;
+            l2 = temp;
+        }
+    l1 = l1/l2;
+    l1 = l1.toFixed(2);
+
+	return l1;
+  
+} // getRatio function
+
+// ************************************************************
 // walks through ancestors to get background color which is not inherited
 function getBackgroundColor(elem) {
 	
@@ -539,6 +633,8 @@ console.log(getComputedStyle(elem).backgroundColor);
 
 /* ******************************************************************* */
 function updateDOM(e) {
+	var cn;
+	var cv;
 	var node = document.getElementById("__a11ynode");
 	var overlay = document.getElementById("__a11yoverlay");
 	if ((e.target != document.body)
@@ -577,10 +673,12 @@ function updateDOM(e) {
 		
 		// color hex values to display
 		cn = document.createElement("span");
-	  cn.textContent = " "+hexc(window.getComputedStyle(e.target).getPropertyValue("color"))+" ";
+	  	cn.textContent = " "+hexc(window.getComputedStyle(e.target).getPropertyValue("color"))+" ";
 		cn1 = document.createElement("span");
-	  cn1.textContent = " "+hexc(c1.style.backgroundColor)+" ";
-		
+	  	cn1.textContent = " "+hexc(c1.style.backgroundColor)+" ";
+	  	cv = document.createElement("span");
+		cv.textContent = getRatio(hexc(window.getComputedStyle(e.target).getPropertyValue("color")), hexc(c1.style.backgroundColor))+":1 ";
+
 		role = document.createElement("span");
 		role.style.color = "black";
 		if (e.target.hasAttribute("role")) 
@@ -604,6 +702,7 @@ function updateDOM(e) {
 		
 		node.appendChild(cn);
 		node.appendChild(cn1);
+		node.appendChild(cv);
 		node.appendChild(role);
 		node.appendChild(accName);
 		node.appendChild(accNameValue);
