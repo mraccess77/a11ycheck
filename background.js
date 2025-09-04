@@ -1,279 +1,249 @@
-// Called when the user clicks on the browser action.
-chrome.browserAction.onClicked.addListener(function(tab) {
+const sharedContexts = ["all", "page", "selection", "image", "link"];
+const menuItems = [
+	{ id: "showDOM", title: "Inspect DOM" },
+	{ id: "showHeadingStructure", title: "Show Heading Structure" },
+	{ id: "showListOfLinks", title: "Show List of Links" },
+	{ id: "showARIA", title: "Show ARIA markup" },
+	{ id: "blackoutARIAHidden", title: "Blackout aria-hidden" },
+	{ id: "removeStyles", title: "Remove styles" },
+	{ id: "removeBackgroundImages", title: "Remove background images" },
+	{ id: "grayscale", title: "Grayscale" },
+	{ id: "linearlizeTables", title: "Linearize tables" },
+	{ id: "complexTables", title: "Show headers for complex Tables" },
+	{ id: "showLang", title: "Show lang attributes" },
+	{ id: "showTitle", title: "Show title attributes" },
+	{ id: "showFocusOrder", title: "Show focus order" },
+	{ id: "showSRONly", title: "Show class sr-only" },
+	{ id: "enhancedFocus", title: "Enhanced Focus" },
+	{ id: "textSpacing", title: "Text Spacing" },
+	{ id: "speakSelection", title: "Speak Selection" },
+	{ id: "showIFrames", title: "Show iFrames" }
+];
 
-	chrome.tabs.insertCSS(null, {file:"a11y.css", allFrames:true} );
 
-  if (tab)
-    chrome.tabs.sendMessage(tab.id, {msg:"alt"}, function(response) { } );
+// initial setup
+chrome.runtime.onInstalled.addListener(function () {
 
+	// When the app gets installed, set up the context menus
+	menuItems.forEach(item => {
+		chrome.contextMenus.create({
+			id: item.id,
+			title: item.title,
+			contexts: sharedContexts
+		});
+
+	});
 });
 
-chrome.runtime.onInstalled.addListener(function() {
-  // When the app gets installed, set up the context menus
-
+// Dynamically handle all context menu clicks
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+	const matchedItem = menuItems.find(item => item.id === info.menuItemId);
+	if (info.menuItemId === "textSpacing") {
+		textSpacing(tab.id);
+	}
+	else if (info.menuItemId == "darken") {
+		darken(tab.id);
+	}
+	else if (info.menuItemId === "grayscale") {
+		grayscale(tab.id);
+	}
+	else if (info.menuItemId == "linearizeTables") {
+		linearizeTables(tab.id);
+	}
+	else if (info.menuItemId == "removeBackgroundImages") {
+		removeBackgroundImages(tab.id);
+	}
+	else if (info.menuItemId == "blackoutARIAHidden") {
+		blackoutARIAHidden(tab.id);
+	}
+	else if (info.menuItemId == "showLang") {
+		showLang(tab.id);
+	}
+	else if (info.menuItemId == "showTitle") {
+		showTitle(tab.id);
+	}
+	else if (info.menuItemId == "showARIA") {
+		showARIA(tab.id);
+	}
+	else if (info.menuItemId == "complexTables") {
+		complexTables(tab.id);
+	}
+	else if (info.menuItemId == "showIFrames") {
+		showIFrames(tab.id);
+	}
+	else if (info.menuItemId == "showSROnly") {
+		showSROnly(tab.id);
+	}
+	else if (info.menuItemId == "enhancedFocus") {
+		enhancedFocus(tab.id);
+	}
+	else if (info.menuItemId == "showHeadingStructure") {
+		showHeadingStructure(tab.id);
+	}
+	else if (info.menuItemId == "showListOfLinks") {
+		showListOfLinks(tab.id);
+	}
+	else if (matchedItem && tab?.id) {
+		chrome.tabs.sendMessage(tab.id, { msg: matchedItem.id, tabId: tab.id });
+	}
+	
 });
 
-chrome.contextMenus.create({
-	"title": "Inspect DOM",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showDOM
-});
-
-chrome.contextMenus.create({
-	"title": "Show Heading Structure",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showHeadingStructure
-});
-
-chrome.contextMenus.create({
-	"title": "Show List of Links",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showListOfLinks
-});
-
-chrome.contextMenus.create({
-	"title": "Show ARIA markup",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" : showARIA
-});
-
-chrome.contextMenus.create({
-	"title": "Blackout aria-hidden",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" : blackoutARIAHidden
-});
-
-chrome.contextMenus.create({
-	"title": "Remove styles",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  removeStyles
-});
-
-
-chrome.contextMenus.create({
-	"title": "Remove background images",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  removeBackgroundImages
-});
-
-chrome.contextMenus.create({
-	"title": "Grayscale",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  grayscale
-});
-
-chrome.contextMenus.create({
-	"title": "Linearize tables",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  linearizeTables
-});
-
-chrome.contextMenus.create({
-	"title": "Show headers for complex Tables",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  complexTables
-});
-
-chrome.contextMenus.create({
-	"title": "Show lang attributes",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showLang
-});
-
-chrome.contextMenus.create({
-	"title": "Show title attributes",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showTitles
-});
-
-chrome.contextMenus.create({
-	"title": "Show focus order",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showFocusOrder
-});
-
-chrome.contextMenus.create({
-	"title": "Show class sr-only",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" : showSROnly
-});
-
-chrome.contextMenus.create({
-	"title": "Enhanced Focus",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  enhancedFocus
-});
-
-chrome.contextMenus.create({
-	"title": "Text Spacing",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  textSpacing
-});
-
-/*
-chrome.contextMenus.create({
-	"title": "Show width and scale",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  responsive
-});
-
-chrome.contextMenus.create({
-	"title": "Show iFrames",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showIFrames
-});
-
-chrome.contextMenus.create({
-	"title": "Make text darker",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  darken
-});
-*/
-
-chrome.contextMenus.create({
-	"title": "Speak Selection",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  speakSelection
-});
-
-chrome.contextMenus.create({
-	"title": "Inspect DOM (alpha)",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showDOM
-});
-
-chrome.contextMenus.create({
-	"title": "Show iFrames",
-	"contexts": ["all", "page", "selection", "image", "link"],
-	"onclick" :  showIFrames
-});
-
-function showARIA(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showARIA"}, function(response) { } );
+// Apply text spacing CSS
+async function textSpacing(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["text_spacing.css"]
+	});
 }
 
-function showHeadingStructure(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showHeadingStructure"}, function(response) { } );
+async function darken(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["darken.css"]
+	});
 }
 
-function showListOfLinks(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showListOfLinks"}, function(response) { } );
+async function grayscale(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["grayscale.css"]
+	});
 }
 
-function textSpacing(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"text_spacing.css", allFrames:true} );
+async function linearizeTables(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["linearlizeTables.css"]
+	});
 }
 
-function darken(info, tab) {
-  // chrome.tabs.sendMessage(tab.id, {msg:"darken"}, function(response) { } );
-	chrome.tabs.insertCSS(null, {file:"darken.css", allFrames:true} );
+async function removeBackgroundImages(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["removeBackgroundImages.css"]
+	});
 }
 
-function responsive(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showResponsive"}, function(response) { } );
+async function blackoutARIAHidden(tabId) {
+	await chrome.scripting.insertCSS({
+		target: { tabId: tabId },
+		files: ["aria-hidden.css"]
+	});
 }
 
-function showDOM(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showDOM"}, function(response) { } );
+async function showLang(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["lang.js"]
+	});
 }
 
-function enhancedFocus(info, tab) {
-	//chrome.tabs.insertCSS(null, {file:"enhancedFocus.css"} );
-  chrome.tabs.sendMessage(tab.id, {msg:"enhanceFocus"}, function(response) { } );
+async function showTitle(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["title_attribute.js"]
+	});
 }
 
-// , function(response) { }
-function removeStyles(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"removeStyles"});
+async function showARIA(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["ARIAchecker.js"]
+	});
 }
 
-function grayscale(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"grayscale.css", allFrames:true} );
+async function complexTables(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["complex_tables.js"]
+	});
 }
 
-function linearizeTables(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"linearizeTables.css", allFrames:true} );
+async function showSROnly(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["sr-only.js"]
+	});
 }
 
-function complexTables(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"complexTables"}, function(response) { } );
+async function showIFrames(tabId) {
+	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["iFrames.js"]
+	});
 }
 
-function showLang(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showLang"}, function(response) { } );
+async function enhancedFocus(tabId) {
+  	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["focus.js"]
+	});
 }
 
-function showTitles(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showTitles"}, function(response) { } );
+// Displays a list of heading structures
+async function showHeadingStructure(tabId) {
+	  	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["recursion.js","headingstructure.js"]
+	}); 
 }
 
-function showFocusOrder(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showFocusOrder"}, function(response) { } );
+// Displays a list of links
+async function showListOfLinks(tabId) {
+		  	chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["recursion.js","listoflinks.js"]
+	}); 
 }
 
-function removeBackgroundImages(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"removeBackgroundImages.css", allFrames:true} );
-}
-
-function blackoutARIAHidden(info, tab) {
-	chrome.tabs.insertCSS(null, {file:"aria-hidden.css", allFrames:true} );
-}
-
-
-function showSROnly(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showSROnly"}, function(response) { } );
-}
-
-function showIFrames(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {msg:"showIFrames"}, function(response) { } );
-}
-
+// Speak selection
 function speakSelection(info, tab) {
-// console.log('jon');
+	// console.log('speak selection');
 
-/*
-chrome.tts.getVoices(
-          function(voices) {
-            for (var i = 0; i < voices.length; i++) {
-              console.log('Voice ' + i + ':');
-              console.log('  name: ' + voices[i].voiceName);
-              console.log('  lang: ' + voices[i].lang);
-              console.log('  gender: ' + voices[i].gender);
-              console.log('  extension id: ' + voices[i].extensionId);
-              console.log('  event types: ' + voices[i].eventTypes);
-            }
-          });
-*/
- // console.log("yes");
- chrome.tabs.query ( { active: true, currentWindow: true}, function(tabs) {
-  //chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
-  //chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );
-  speakSelectionHelper({resp: info.selectionText});
- });
+	/*
+	chrome.tts.getVoices(
+			  function(voices) {
+				for (var i = 0; i < voices.length; i++) {
+				  console.log('Voice ' + i + ':');
+				  console.log('  name: ' + voices[i].voiceName);
+				  console.log('  lang: ' + voices[i].lang);
+				  console.log('  gender: ' + voices[i].gender);
+				  console.log('  extension id: ' + voices[i].extensionId);
+				  console.log('  event types: ' + voices[i].eventTypes);
+				}
+			  });
+	*/
+	// console.log("yes");
+	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		//chrome.tabs.sendMessage(tabs[0].id, {msg:"getSelection"}, speakSelectionHelper );
+		//chrome.tabs.sendMessage(tab.id, {msg:"getSelection"}, speakSelectionHelper );
+		speakSelectionHelper({ resp: info.selectionText });
+	});
 }
 
 function speakSelectionHelper(response) {
-  // console.log("hello");
+	// console.log("speak selection helper");
 	var utterance = "no selection";
-	try {	
-	  utterance = response.resp.toString();
+	try {
+		utterance = response.resp.toString();
 	}
 	catch (err) {
-	  console.log(err.message);
+		console.log(err.message);
 	}
 	console.log(utterance);
 	//var options = {"lang": "en-US", "rate": 2.2};
 	//chrome.tts.speak("jon", options);
 	chrome.tts.stop();
 	chrome.tts.speak(
-          utterance,
-          {'lang': 'en-US','rate': 5},
-          function() {
-            if (chrome.runtime.lastError) {
-              console.log('Error: ' + chrome.runtime.lastError.message);
-            }
-          } );
-		  
+		utterance,
+		{ 'lang': 'en-US', 'rate': 5 },
+		function () {
+			if (chrome.runtime.lastError) {
+				console.log('Error: ' + chrome.runtime.lastError.message);
+			}
+		});
+
 
 }
 
@@ -348,6 +318,6 @@ utterance.rate = 0.8;     // speaking rate, default is 1
 var chunks = [];
 
 for (var i = 0, charsLength = str.length; i < charsLength; i += 3) {
-    chunks.push(str.substring(i, i + 3));
+	chunks.push(str.substring(i, i + 3));
 }
 */

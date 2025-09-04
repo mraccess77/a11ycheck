@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+
+  "name": "A11y checker",
+  "description": "Accessibility checker",
+  "version": "1.0",
+  "browser_action": {
+  },
+  "background": {
+  	"scripts": ["background.js"],
+  	"persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["a11y.js","recursion.js"]			
+    }
+  ],
+	"web_accessible_resources": [
+			 "darken.js",
+			 "sr-only.js",
+			 "enhancedFocus.css",
+			 "text_spacing.css",
+			 "focus.js",
+			 "iFrames.js",
+			 "headingstructure.js",
+			 "recursion.js",
+			 "listoflinks.js"
+	 ],
+  "icons": {"32": "Acheck.png"}, 
+	"permissions": [
+   "activeTab",
+   "tabs",
+   "contextMenus",
+   "http://*/*", 
+   "https://*/*", 
+   "file://*/*",
+   "webRequest",
+   "tts"
+  ]
+}

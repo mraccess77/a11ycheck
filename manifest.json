@@ -1,41 +1,67 @@
-{
-  "manifest_version": 2,
+    {
+  "manifest_version": 3,
 
-  "name": "A11y checker",
+  "name": "A11y Checker",
   "description": "Accessibility checker",
-  "version": "1.0",
-  "browser_action": {
+  "version": "1.1",
+
+  "action": {
+    "default_icon": {
+      "32": "Acheck.png"
+    },
+    "default_title": "Run A11y Checker",
+    "default_popup": "popup.html"
   },
+
   "background": {
-  	"scripts": ["background.js"],
-  	"persistent": true
+    "service_worker": "background.js"
   },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["a11y.js","recursion.js"]			
+      "js": ["a11y.js", "recursion.js"]
     }
   ],
-	"web_accessible_resources": [
-			 "darken.js",
-			 "sr-only.js",
-			 "enhancedFocus.css",
-			 "text_spacing.css",
-			 "focus.js",
-			 "iFrames.js",
-			 "headingstructure.js",
-			 "recursion.js",
-			 "listoflinks.js"
-	 ],
-  "icons": {"32": "Acheck.png"}, 
-	"permissions": [
-   "activeTab",
-   "tabs",
-   "contextMenus",
-   "http://*/*", 
-   "https://*/*", 
-   "file://*/*",
-   "webRequest",
-   "tts"
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "darken.js",
+        "sr-only.js",
+        "lang.js",
+        "enhancedFocus.css",
+        "text_spacing.css",
+        "focus.js",
+        "iFrames.js",
+        "title_attribute.js",
+        "headingstructure.js",
+        "recursion.js",
+        "listoflinks.js",
+        "complex_tables.js",
+        "ARIAchecker.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "icons": {
+    "32": "Acheck.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "tts"
+  ],
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file://*/*",
+    "<all_urls>"
   ]
 }
