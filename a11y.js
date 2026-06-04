@@ -517,7 +517,7 @@ function updateDOM(e) {
     cn = document.createElement("span");
     cn.textContent = " " + hexc(window.getComputedStyle(e.target).getPropertyValue("color")) + " ";
     cn1 = document.createElement("span");
-    cn1.textContent = " " + hexc(c1.style.backgroundColor) + " ";
+    cn1.textContent = " " + hexc(getBackgroundColor(e.target)) + " ";
     cv = document.createElement("span");
     cv.textContent = getRatio(hexc(window.getComputedStyle(e.target).getPropertyValue("color")), hexc(c1.style.backgroundColor)) + ":1 ";
 
