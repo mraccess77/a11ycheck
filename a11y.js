@@ -519,7 +519,7 @@ function updateDOM(e) {
     cn1 = document.createElement("span");
     cn1.textContent = " " + hexc(getBackgroundColor(e.target)) + " ";
     cv = document.createElement("span");
-    cv.textContent = getRatio(hexc(window.getComputedStyle(e.target).getPropertyValue("color")), hexc(c1.style.backgroundColor)) + ":1 ";
+    cv.textContent = getRatio(hexc(window.getComputedStyle(e.target).getPropertyValue("color")), hexc(getBackgroundColor(e.target))) + ":1 ";
 
     role = document.createElement("span");
     role.style.color = "black";
