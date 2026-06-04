@@ -458,6 +458,41 @@ function getRatio(color1, color2) {
 
 // ************************************************************
 // walks through ancestors to get background color which is not inherited
+
+function getBackgroundColor(elem) {
+  const TRANSPARENT = ['transparent', 'rgba(0, 0, 0, 0)'];
+
+  while (elem) {
+    const bg = getComputedStyle(elem).backgroundColor;
+
+    if (!TRANSPARENT.includes(bg)) {
+      return bg;
+    }
+
+    elem = elem.parentElement;
+  }
+
+  // No ancestor had a background → return the canvas color (white)
+  return 'rgb(255, 255, 255)';
+}
+
+/*
+function getBackgroundColor(elem) {
+  const TRANSPARENT = ['transparent', 'rgba(0, 0, 0, 0)'];
+
+  while (elem) {
+    const bg = getComputedStyle(elem).backgroundColor;
+
+    if (!TRANSPARENT.includes(bg)) {
+      return bg;
+    }
+
+    elem = elem.parentElement;
+  }
+
+  return 'rgba(0, 0, 0, 0)';
+}
+
 function getBackgroundColor(elem) {
 
   var transparent = 'rgba(0, 0, 0, 0)';
@@ -472,6 +507,7 @@ function getBackgroundColor(elem) {
     return bg;
   }
 }
+  */
 
 /* ******************************************************************* */
 function updateDOM(e) {
@@ -502,6 +538,7 @@ function updateDOM(e) {
     c1.style.width = ".9em";
     c1.style.height = ".9em";
     c1.style.backgroundColor = getBackgroundColor(e.target);
+    console.log(getBackgroundColor(e.target));
 
     // grandparent, parent, and element tag name string to display
     s.style.color = "darkred";
